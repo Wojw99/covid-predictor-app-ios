@@ -1,2 +1,3 @@
-# covid-predictor-app-ios
-Covid prediction mobile application with IOS style UI. 
+# covid_prediction_app_ios
+
+A covid prediction mobile application with IOS style UI.
