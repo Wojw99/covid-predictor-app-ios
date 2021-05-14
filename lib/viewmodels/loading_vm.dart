@@ -19,6 +19,7 @@ class LoadingViewModel extends ChangeNotifier {
   String _errorText = '';
   String get errorText => _errorText;
 
+  // fetch API data (if not fetching yet) and fill in Singleton lists
   void fetchApiData() async {
     if (loading) return;
 

@@ -1,9 +1,11 @@
+import 'package:covid_prediction_app_ios/utils/app_colors.dart';
 import 'package:covid_prediction_app_ios/utils/app_styles.dart';
 import 'package:covid_prediction_app_ios/utils/strings.dart';
 import 'package:covid_prediction_app_ios/viewmodels/loading_vm.dart';
 import 'package:covid_prediction_app_ios/viewmodels/main_vm.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 
 import 'main_page.dart';
@@ -33,11 +35,11 @@ class _LoadingPageState extends State<LoadingPage> {
     if (_viewModel.error) {
       return Scaffold(
         body: Container(
-          color: Colors.red,
+          color: AppColors.light,
           child: Center(
             child: Text(
               _viewModel.errorText,
-              style: AppStyles.smallTextStyle,
+              style: AppStyles.textDark,
             ),
           ),
         ),
@@ -48,11 +50,11 @@ class _LoadingPageState extends State<LoadingPage> {
     _viewModel.fetchApiData();
     return Scaffold(
       body: Container(
-        color: Colors.green,
+        color: AppColors.light,
         child: Center(
-          child: Text(
-            Strings.loadingData,
-            style: AppStyles.smallTextStyle,
+          child: SpinKitDoubleBounce(
+            color: AppColors.accentRed,
+            size: 50.0,
           ),
         ),
       ),

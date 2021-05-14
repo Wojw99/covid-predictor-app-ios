@@ -1,3 +1,4 @@
+import 'package:covid_prediction_app_ios/utils/app_colors.dart';
 import 'package:covid_prediction_app_ios/utils/strings.dart';
 import 'package:covid_prediction_app_ios/view/pages/loading_page.dart';
 import 'package:covid_prediction_app_ios/viewmodels/loading_vm.dart';
@@ -16,6 +17,7 @@ class MyApp extends StatelessWidget {
       title: Strings.appName,
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        fontFamily: 'SFPro',
       ),
       home: MultiProvider(
         providers: [
