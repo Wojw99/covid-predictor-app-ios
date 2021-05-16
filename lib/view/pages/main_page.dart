@@ -52,9 +52,11 @@ class _MainPageState extends State<MainPage> {
                 ),
 
                 /// - - - - - - COVID IMAGE - - - - - -
-                Image(
-                  image: AssetImage('assets/img/covid-2.png'),
-                  height: 90.0,
+                Flexible(
+                  child: Image(
+                    image: AssetImage('assets/img/covid-2.png'),
+                    height: 90.0,
+                  ),
                 ),
 
                 /// - - - - - - BUTTONS - - - - - -

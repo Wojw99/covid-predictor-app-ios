@@ -8,6 +8,9 @@ class MapViewModel extends ChangeNotifier {
   List<Region> _predictionList = Singleton.predictionList;
   List<Region> _realList = Singleton.realList;
 
+  List<Region> get predictionList => _predictionList;
+  List<Region> get realList => _realList;
+
   /// For DatePicker
   DateTime get firstDate => _predictionList.first.outputs.first.date;
   DateTime get lastDate => _predictionList.first.outputs.last.date;

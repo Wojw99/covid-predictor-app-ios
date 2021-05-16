@@ -8,17 +8,24 @@ class IosButton extends StatelessWidget {
   final String text;
   final IconData iconData;
 
-  final double radius = 9.0;
-  final double elevation = 0.0;
-  final double height = 36.0;
+  final double radius;
+  final double elevation;
+  final double height;
 
-  final TextStyle textStyle = AppStyles.textButton;
-  final Color backgroundColor = AppColors.accent;
+  final TextStyle textStyle;
+  final Color backgroundColor;
+  final bool disabledColor;
 
   IosButton({
     @required this.onPressed,
     @required this.text,
     this.iconData,
+    this.backgroundColor = AppColors.accent,
+    this.textStyle = AppStyles.textButton,
+    this.disabledColor = false,
+    this.radius = 9.0,
+    this.elevation = 0.0,
+    this.height = 36.0,
   });
 
   @override
@@ -44,14 +51,21 @@ class IosButton extends StatelessWidget {
             /// * * * * * * TEXT * * * * * *
             Text(
               text,
-              style: textStyle,
+              style: !disabledColor
+                  ? textStyle
+                  : textStyle.copyWith(
+                      color: AppColors.textLight,
+                      fontWeight: FontWeight.normal,
+                    ),
             ),
           ],
         ),
       ),
       style: ButtonStyle(
         elevation: MaterialStateProperty.all<double>(elevation),
-        backgroundColor: MaterialStateProperty.all<Color>(backgroundColor),
+        backgroundColor: !disabledColor
+            ? MaterialStateProperty.all<Color>(backgroundColor)
+            : MaterialStateProperty.all<Color>(AppColors.gray),
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
           RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(radius),

@@ -69,7 +69,10 @@ class _TablePageState extends State<TablePage> {
               Container(
                 decoration: BoxDecoration(
                   color: AppColors.accentLight,
-                  borderRadius: BorderRadius.circular(Constants.radiusDefault),
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(Constants.radiusDefault),
+                    topRight: Radius.circular(Constants.radiusDefault),
+                  ),
                 ),
                 child: Padding(
                   padding: EdgeInsets.symmetric(
@@ -150,7 +153,7 @@ class _TablePageState extends State<TablePage> {
                               ),
                               Container(
                                 height: 1.0,
-                                color: AppColors.textLight,
+                                color: AppColors.gray,
                               ),
                             ],
                           ),

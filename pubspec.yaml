@@ -15,6 +15,7 @@ dependencies:
   flutter_spinkit: ^5.0.0
   url_launcher: ^6.0.3
   provider: ^5.0.0
+  syncfusion_flutter_maps: ^19.1.63-beta
 
 dev_dependencies:
   flutter_test:

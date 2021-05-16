@@ -20,4 +20,7 @@ class Strings {
 
   // TablePage
   static const String region = 'Region';
+
+  // ChartPage
+  static const String search = 'Search';
 }
