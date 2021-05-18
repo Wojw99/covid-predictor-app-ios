@@ -141,7 +141,7 @@ class ChartViewModel extends ChangeNotifier {
   }
 
   /// Change day (output list index) for which data will be visible
-  void changeIndex(int index) {
+  void changeIndex(int index, double value) {
     if (index != null) {
       _currentIndex = index;
       notifyListeners();

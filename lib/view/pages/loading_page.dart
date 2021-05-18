@@ -1,8 +1,6 @@
 import 'package:covid_prediction_app_ios/utils/app_colors.dart';
 import 'package:covid_prediction_app_ios/utils/app_styles.dart';
-import 'package:covid_prediction_app_ios/utils/strings.dart';
 import 'package:covid_prediction_app_ios/viewmodels/loading_vm.dart';
-import 'package:covid_prediction_app_ios/viewmodels/main_vm.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';

@@ -25,6 +25,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/img/
+    - world.json
   fonts:
     - family: SFPro
       fonts:

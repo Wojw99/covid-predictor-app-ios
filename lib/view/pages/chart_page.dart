@@ -47,18 +47,15 @@ class _ChartPageState extends State<ChartPage> {
         child: Container(
           color: AppColors.gray,
           child: Padding(
-            padding: EdgeInsets.all(Constants.screenPadding),
+            padding: EdgeInsets.fromLTRB(
+              Constants.screenPadding,
+              0,
+              Constants.screenPadding,
+              Constants.screenPadding,
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                /// * * * * * HEADER * * * * *
-                // Text(
-                //   Strings.chart,
-                //   style: AppStyles.header1,
-                // ),
-                //
-                // SizedBox(height: 10.0),
-
                 /// * * * * * TEXT FIELD REGION * * * * *
                 IosTextField(
                   iconData: Icons.search,
@@ -69,7 +66,7 @@ class _ChartPageState extends State<ChartPage> {
                   },
                 ),
 
-                SizedBox(height: 20.0),
+                SizedBox(height: Constants.screenPadding),
 
                 Container(
                   decoration: AppStyles.defaultBoxDecoration,
@@ -131,15 +128,13 @@ class _ChartPageState extends State<ChartPage> {
                               Constants.screenPadding * 4,
                           height: MediaQuery.of(context).size.height / 2,
                           values: _viewModel.getOutputCases(),
-                          onPressed: (index, value) {
-                            _viewModel.changeIndex(index);
-                          },
+                          onPressed: _viewModel.changeIndex,
                           barColor: AppColors.accentLight,
                           selectedBarColor: AppColors.accent,
                         ),
 
                         SizedBox(
-                          height: 5.0,
+                          height: Constants.screenPadding,
                         ),
 
                         /// * * * * * CHART SETTINGS * * * * *
@@ -169,6 +164,10 @@ class _ChartPageState extends State<ChartPage> {
                                   .toList()),
                         ),
 
+                        SizedBox(
+                          height: Constants.screenPadding / 2,
+                        ),
+
                         Row(
                           children: [
                             /// * * * PREDICTED * * *
@@ -177,8 +176,7 @@ class _ChartPageState extends State<ChartPage> {
                                 onPressed: () {
                                   _viewModel.changePredicted(true);
                                 },
-                                disabledColor:
-                                    _viewModel.showPredicted ? false : true,
+                                disabledColor: !_viewModel.showPredicted,
                                 text: Strings.predicted,
                               ),
                             ),
@@ -192,8 +190,7 @@ class _ChartPageState extends State<ChartPage> {
                                 onPressed: () {
                                   _viewModel.changePredicted(false);
                                 },
-                                disabledColor:
-                                    _viewModel.showPredicted ? true : false,
+                                disabledColor: _viewModel.showPredicted,
                                 text: Strings.real,
                               ),
                             ),

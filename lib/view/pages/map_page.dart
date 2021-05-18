@@ -25,13 +25,11 @@ class _MapPageState extends State<MapPage> {
     _viewModel = Provider.of<MapViewModel>(context);
     _dataSource = MapShapeSource.asset(
       "assets/world.json",
-      shapeDataField: "continent",
-      dataCount: _viewModel.predictionList.length,
+      shapeDataField: "name",
+      dataCount: _viewModel.getDataCount(),
       primaryValueMapper: (int index) =>
-          _viewModel.predictionList[index].region,
-      bubbleSizeMapper: (int index) =>
-          _viewModel.predictionList[index].outputs.first.cases.toDouble(),
-      // bubbleColorValueMapper: (int index) => data[index].bubbleColor,
+          _viewModel.getPrimaryValueMapper(index),
+      bubbleSizeMapper: (int index) => _viewModel.getBubbleSizeMapper(index),
     );
   }
 
@@ -42,25 +40,30 @@ class _MapPageState extends State<MapPage> {
       appBar: AppBar(
         elevation: 0.0,
         backgroundColor: AppColors.gray,
+        title: Text(
+          Strings.worldMap,
+          style: TextStyle(
+            color: AppColors.textDark,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        centerTitle: true,
         leading: IosBackButton(onPressed: () => Navigator.of(context).pop()),
       ),
       body: Container(
         color: AppColors.gray,
-        child: Padding(
-          padding: EdgeInsets.all(Constants.screenPadding),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              /// * * * * * HEADER * * * * *
-              Text(
-                Strings.worldMap,
-                style: AppStyles.header1,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            /// * * * * * BUTTON DATE * * * * *
+            Padding(
+              padding: EdgeInsets.fromLTRB(
+                Constants.screenPadding,
+                0,
+                Constants.screenPadding,
+                Constants.screenPadding / 2,
               ),
-
-              SizedBox(height: 10.0),
-
-              /// * * * * * BUTTON DATE * * * * *
-              IosButton(
+              child: IosButton(
                 onPressed: () {
                   showDatePicker(
                     context: context,
@@ -72,23 +75,85 @@ class _MapPageState extends State<MapPage> {
                 text: _viewModel.selectedDateString,
                 iconData: Icons.calendar_today,
               ),
+            ),
 
-              SizedBox(height: 20.0),
-
-              /// * * * * * WORLD MAP * * * * *
-              SfMaps(
-                layers: [
-                  MapShapeLayer(
-                    source: _dataSource,
-                    bubbleSettings: MapBubbleSettings(
-                      maxRadius: 30,
-                      minRadius: 15,
+            /// * * * * * WORLD MAP * * * * *
+            Expanded(
+              child: Container(
+                color: AppColors.light,
+                child: SfMaps(
+                  layers: [
+                    MapShapeLayer(
+                      source: _dataSource,
+                      bubbleSettings: MapBubbleSettings(
+                        maxRadius: 30,
+                        minRadius: 15,
+                        color: AppColors.accent.withOpacity(0.5),
+                      ),
+                      color: AppColors.accentLight,
+                      bubbleTooltipBuilder: (
+                        BuildContext context,
+                        int index,
+                      ) {
+                        return Padding(
+                          padding: EdgeInsets.all(10.0),
+                          child: Text(
+                            'Region: ${_viewModel.getPrimaryValueMapper(index)}'
+                            '\nCases: ${_viewModel.getBubbleSizeMapper(index).toInt()}',
+                            style: AppStyles.textButton
+                                .copyWith(fontWeight: FontWeight.normal),
+                          ),
+                        );
+                      },
+                      zoomPanBehavior: MapZoomPanBehavior(
+                        enablePanning: true,
+                        enableDoubleTapZooming: true,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ],
-          ),
+            ),
+
+            /// * * * * * SETTINGS * * * * *
+            Container(
+              color: AppColors.light,
+              child: Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: Constants.screenPadding,
+                  vertical: Constants.screenPadding / 3,
+                ),
+                child: Row(
+                  children: [
+                    /// * * * PREDICTED * * *
+                    Expanded(
+                      child: IosButton(
+                        onPressed: () {
+                          _viewModel.changePredicted(true);
+                        },
+                        disabledColor: _viewModel.showPredicted ? false : true,
+                        text: Strings.predicted,
+                      ),
+                    ),
+                    SizedBox(
+                      width: 10.0,
+                    ),
+
+                    /// * * * REAL * * *
+                    Expanded(
+                      child: IosButton(
+                        onPressed: () {
+                          _viewModel.changePredicted(false);
+                        },
+                        disabledColor: _viewModel.showPredicted ? true : false,
+                        text: Strings.real,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );

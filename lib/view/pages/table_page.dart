@@ -30,6 +30,14 @@ class _TablePageState extends State<TablePage> {
       appBar: AppBar(
         elevation: 0.0,
         backgroundColor: AppColors.gray,
+        title: Text(
+          Strings.table,
+          style: TextStyle(
+            color: AppColors.textDark,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        centerTitle: true,
         leading: IosBackButton(onPressed: () => Navigator.of(context).pop()),
       ),
 
@@ -41,14 +49,6 @@ class _TablePageState extends State<TablePage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              /// * * * * * HEADER * * * * *
-              Text(
-                Strings.table,
-                style: AppStyles.header1,
-              ),
-
-              SizedBox(height: 10.0),
-
               /// * * * * * BUTTON DATE * * * * *
               IosButton(
                 onPressed: () {
@@ -63,7 +63,7 @@ class _TablePageState extends State<TablePage> {
                 iconData: Icons.calendar_today,
               ),
 
-              SizedBox(height: 20.0),
+              SizedBox(height: Constants.screenPadding),
 
               /// * * * * * TABLE DESCRIPTION * * * * *
               Container(
