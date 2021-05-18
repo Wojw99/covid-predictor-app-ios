@@ -81,6 +81,8 @@ class ApiService {
     ];
   }
 
+  /// Poland, USA - two more outputs than the real list,
+  /// Germany - same amount of outputs
   Future<List<Region>> getPredictionsListTest() async {
     await Future.delayed(Duration(seconds: 2), () {});
     return [
@@ -94,6 +96,8 @@ class ApiService {
           Output(date: DateTime.utc(2021, 04, 22), cases: 43),
           Output(date: DateTime.utc(2021, 04, 23), cases: 56),
           Output(date: DateTime.utc(2021, 04, 24), cases: 123),
+          Output(date: DateTime.utc(2021, 04, 25), cases: 666),
+          Output(date: DateTime.utc(2021, 04, 26), cases: 666),
         ],
       ),
       Region(
@@ -121,6 +125,8 @@ class ApiService {
           Output(date: DateTime.utc(2021, 04, 22), cases: 143),
           Output(date: DateTime.utc(2021, 04, 23), cases: 256),
           Output(date: DateTime.utc(2021, 04, 24), cases: 3123),
+          Output(date: DateTime.utc(2021, 04, 25), cases: 666),
+          Output(date: DateTime.utc(2021, 04, 26), cases: 666),
         ],
       ),
     ];

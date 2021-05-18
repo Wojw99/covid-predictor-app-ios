@@ -68,8 +68,8 @@ class _MapPageState extends State<MapPage> {
                   showDatePicker(
                     context: context,
                     initialDate: _viewModel.selectedDate,
-                    firstDate: _viewModel.firstDate,
-                    lastDate: _viewModel.lastDate,
+                    firstDate: _viewModel.getFirstDate(),
+                    lastDate: _viewModel.getLastDate(),
                   ).then((value) => _viewModel.changeDate(value));
                 },
                 text: _viewModel.selectedDateString,

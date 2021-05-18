@@ -24,9 +24,9 @@ class TableViewModel extends ChangeNotifier {
     }
   }
 
-  int getListsLength() {
-    if (_predictionList.length != _realList.length)
-      throw Exception('Lists have different sizes!');
+  /// There may be more predicted cases than real so the method returns
+  /// length of prediction list
+  int getListLength() {
     return _predictionList.length;
   }
 
@@ -35,22 +35,27 @@ class TableViewModel extends ChangeNotifier {
   }
 
   String getPredictedCasesAt(int index) {
-    return _predictionList[index]
+    // There should be more predicted cases than real cases
+    // but let's check it for sure
+    final matchedOutputs = _predictionList[index]
         .outputs
         .where((element) => element.date == _selectedDate)
-        .toList()
-        .first
-        .cases
-        .toString();
+        .toList();
+
+    if (matchedOutputs.isEmpty) return '...';
+
+    return matchedOutputs.first.cases.toString();
   }
 
   String getRealCasesAt(int index) {
-    return _realList[index]
+    // There may be more real cases than predicted
+    final matchedOutputs = _realList[index]
         .outputs
         .where((element) => element.date == _selectedDate)
-        .toList()
-        .first
-        .cases
-        .toString();
+        .toList();
+
+    if (matchedOutputs.isEmpty) return '...';
+
+    return matchedOutputs.first.cases.toString();
   }
 }

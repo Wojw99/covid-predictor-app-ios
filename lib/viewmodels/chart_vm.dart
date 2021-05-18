@@ -35,30 +35,31 @@ class ChartViewModel extends ChangeNotifier {
   /// Current output date for value description
   String getCurrentOutputDate() {
     final list = getPredictedOutputs();
-    if (list.isNotEmpty) {
+    if (list.isNotEmpty && currentIndex < list.length) {
       return formatDateTime(list[currentIndex].date);
     } else {
-      return '';
+      return '...';
     }
   }
 
   /// Current predicted cases for value description
   String getCurrentPredicted() {
     final list = getPredictedOutputs();
-    if (list.isNotEmpty) {
+    if (list.isNotEmpty && currentIndex < list.length) {
       return list[currentIndex].cases.toString();
     } else {
-      return '';
+      return '...';
     }
   }
 
   /// Current real cases for value description
   String getCurrentReal() {
     final list = getRealOutputs();
-    if (list.isNotEmpty) {
+    // There may be more predicted cases than real cases
+    if (list.isNotEmpty && currentIndex < list.length) {
       return list[currentIndex].cases.toString();
     } else {
-      return '';
+      return '...';
     }
   }
 

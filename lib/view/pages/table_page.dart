@@ -113,7 +113,7 @@ class _TablePageState extends State<TablePage> {
                 child: Container(
                   color: AppColors.light,
                   child: ListView.builder(
-                      itemCount: _viewModel.getListsLength(),
+                      itemCount: _viewModel.getListLength(),
                       itemBuilder: (BuildContext context, int index) {
                         return Container(
                           child: Column(

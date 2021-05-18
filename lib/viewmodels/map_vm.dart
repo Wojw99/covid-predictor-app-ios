@@ -13,15 +13,27 @@ class MapViewModel extends ChangeNotifier {
   bool _showPredicted = true;
   bool get showPredicted => _showPredicted;
 
-  /// For DatePicker
-  DateTime get firstDate => _predictionList.first.outputs.first.date;
-  DateTime get lastDate => _predictionList.first.outputs.last.date;
-
   /// For button with date
-  DateTime _selectedDate = DateTime.utc(2021, 04, 24);
+  DateTime _selectedDate = DateTime.utc(2021, 04, 23);
   DateTime get selectedDate => _selectedDate;
   String get selectedDateString =>
       '${_selectedDate.day}.${_selectedDate.month}.${_selectedDate.year}';
+
+  /// For DatePicker.
+  DateTime getFirstDate() {
+    // It's important to check if showPredicted is true because
+    // prediction list has bigger size.
+    if (_showPredicted) return _predictionList.first.outputs.first.date;
+    return _realList.first.outputs.first.date;
+  }
+
+  /// For DatePicker.
+  DateTime getLastDate() {
+    // It's important to check if showPredicted is true because
+    // prediction list has bigger size.
+    if (_showPredicted) return _predictionList.first.outputs.last.date;
+    return _realList.first.outputs.last.date;
+  }
 
   /// Get region names for map
   String getPrimaryValueMapper(int index) {
@@ -71,6 +83,10 @@ class MapViewModel extends ChangeNotifier {
   void changePredicted(bool showPredicted) {
     if (showPredicted != null) {
       _showPredicted = showPredicted;
+      if (_selectedDate.microsecondsSinceEpoch >
+          getLastDate().microsecondsSinceEpoch) {
+        _selectedDate = getLastDate();
+      }
       notifyListeners();
     }
   }
