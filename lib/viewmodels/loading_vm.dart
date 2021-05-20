@@ -45,10 +45,7 @@ class LoadingViewModel extends ChangeNotifier {
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
-        builder: (context) => ChangeNotifierProvider<MainViewModel>(
-          create: (context) => MainViewModel(),
-          builder: (context, widget) => MainPage(),
-        ),
+        builder: (context) => MainPage(),
       ),
     );
   }

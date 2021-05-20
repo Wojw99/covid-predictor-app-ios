@@ -5,48 +5,48 @@ import 'package:flutter/material.dart';
 class AppStyles {
   AppStyles._();
 
-  static const defaultBoxDecoration = BoxDecoration(
+  static BoxDecoration defaultBoxDecoration = BoxDecoration(
     color: AppColors.light,
     borderRadius: BorderRadius.all(Radius.circular(9.0)),
   );
 
-  static const TextStyle textLight = TextStyle(
+  static TextStyle textLight = TextStyle(
     fontSize: 17.0,
     fontWeight: FontWeight.normal,
     color: AppColors.textLight,
   );
 
-  static const TextStyle textDark = TextStyle(
+  static TextStyle textDark = TextStyle(
     fontSize: 18.0,
     fontWeight: FontWeight.normal,
     color: AppColors.textDark,
   );
 
-  static const TextStyle textButton = TextStyle(
+  static TextStyle textButton = TextStyle(
     fontSize: 17.0,
     fontWeight: FontWeight.w600,
     color: AppColors.light,
   );
 
-  static const TextStyle textChartValue = TextStyle(
+  static TextStyle textChartValue = TextStyle(
     fontSize: 28.0,
     fontWeight: FontWeight.w600,
     color: AppColors.textDark,
   );
 
-  static const TextStyle textChartData = TextStyle(
+  static TextStyle textChartData = TextStyle(
     fontSize: 19.0,
     fontWeight: FontWeight.w600,
     color: AppColors.textLight,
   );
 
-  static const TextStyle header1 = TextStyle(
+  static TextStyle header1 = TextStyle(
     fontSize: 34.0,
     fontWeight: FontWeight.bold,
     color: AppColors.textDark,
   );
 
-  static const TextStyle header2 = TextStyle(
+  static TextStyle header2 = TextStyle(
     fontSize: 28.0,
     fontWeight: FontWeight.normal,
     color: AppColors.textLight,

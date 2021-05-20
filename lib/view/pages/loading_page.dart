@@ -1,5 +1,4 @@
-import 'package:covid_prediction_app_ios/utils/app_colors.dart';
-import 'package:covid_prediction_app_ios/utils/app_styles.dart';
+import 'package:covid_prediction_app_ios/viewmodels/app_theme.dart';
 import 'package:covid_prediction_app_ios/viewmodels/loading_vm.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -15,11 +14,13 @@ class LoadingPage extends StatefulWidget {
 
 class _LoadingPageState extends State<LoadingPage> {
   LoadingViewModel _viewModel;
+  AppTheme _appTheme;
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     _viewModel = Provider.of<LoadingViewModel>(context);
+    _appTheme = Provider.of<AppTheme>(context);
   }
 
   @override
@@ -33,11 +34,11 @@ class _LoadingPageState extends State<LoadingPage> {
     if (_viewModel.error) {
       return Scaffold(
         body: Container(
-          color: AppColors.light,
+          color: _appTheme.colors.light,
           child: Center(
             child: Text(
               _viewModel.errorText,
-              style: AppStyles.textDark,
+              style: _appTheme.textDark,
             ),
           ),
         ),
@@ -48,10 +49,10 @@ class _LoadingPageState extends State<LoadingPage> {
     _viewModel.fetchApiData();
     return Scaffold(
       body: Container(
-        color: AppColors.light,
+        color: _appTheme.colors.light,
         child: Center(
           child: SpinKitDoubleBounce(
-            color: AppColors.accentRed,
+            color: _appTheme.colors.accentRed,
             size: 50.0,
           ),
         ),

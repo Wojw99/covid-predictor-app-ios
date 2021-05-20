@@ -7,6 +7,7 @@ class IosTextField extends StatelessWidget {
   final Function(String) onChanged;
   final IconData iconData;
   final Color backgroundColor;
+  final Color textColor;
   final double height;
 
   IosTextField({
@@ -15,6 +16,7 @@ class IosTextField extends StatelessWidget {
     this.onChanged,
     this.iconData,
     this.backgroundColor = Colors.white,
+    this.textColor = Colors.black,
     this.height = 36.0,
   });
 

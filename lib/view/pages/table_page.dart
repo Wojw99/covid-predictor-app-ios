@@ -1,9 +1,8 @@
-import 'package:covid_prediction_app_ios/utils/app_colors.dart';
-import 'package:covid_prediction_app_ios/utils/app_styles.dart';
 import 'package:covid_prediction_app_ios/utils/constants.dart';
 import 'package:covid_prediction_app_ios/utils/strings.dart';
 import 'package:covid_prediction_app_ios/view/widgets/ios_back_button.dart';
 import 'package:covid_prediction_app_ios/view/widgets/ios_button.dart';
+import 'package:covid_prediction_app_ios/viewmodels/app_theme.dart';
 import 'package:covid_prediction_app_ios/viewmodels/table_vm.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -16,11 +15,13 @@ class TablePage extends StatefulWidget {
 
 class _TablePageState extends State<TablePage> {
   TableViewModel _viewModel;
+  AppTheme _appTheme;
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     _viewModel = Provider.of<TableViewModel>(context);
+    _appTheme = Provider.of<AppTheme>(context);
   }
 
   @override
@@ -29,11 +30,11 @@ class _TablePageState extends State<TablePage> {
       /// * * * * * APP BAR * * * * *
       appBar: AppBar(
         elevation: 0.0,
-        backgroundColor: AppColors.gray,
+        backgroundColor: _appTheme.colors.gray,
         title: Text(
           Strings.table,
           style: TextStyle(
-            color: AppColors.textDark,
+            color: _appTheme.colors.textDark,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -43,7 +44,7 @@ class _TablePageState extends State<TablePage> {
 
       /// * * * * * BODY * * * * *
       body: Container(
-        color: AppColors.gray,
+        color: _appTheme.colors.gray,
         child: Padding(
           padding: EdgeInsets.all(Constants.screenPadding),
           child: Column(
@@ -68,7 +69,7 @@ class _TablePageState extends State<TablePage> {
               /// * * * * * TABLE DESCRIPTION * * * * *
               Container(
                 decoration: BoxDecoration(
-                  color: AppColors.accentLight,
+                  color: _appTheme.colors.accentLight,
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(Constants.radiusDefault),
                     topRight: Radius.circular(Constants.radiusDefault),
@@ -84,22 +85,22 @@ class _TablePageState extends State<TablePage> {
                       Expanded(
                         child: Text(
                           Strings.region,
-                          style: AppStyles.textDark,
+                          style: _appTheme.textDark,
                         ),
                         flex: 20,
                       ),
                       Expanded(
                         child: Text(
                           Strings.predicted,
-                          style: AppStyles.textDark
-                              .copyWith(color: AppColors.accent),
+                          style: _appTheme.textDark
+                              .copyWith(color: _appTheme.colors.accent),
                         ),
                         flex: 20,
                       ),
                       Expanded(
                         child: Text(
                           Strings.real,
-                          style: AppStyles.textDark,
+                          style: _appTheme.textDark,
                         ),
                         flex: 12,
                       ),
@@ -111,7 +112,7 @@ class _TablePageState extends State<TablePage> {
               /// * * * * * TABLE CONTENT * * * * *
               Expanded(
                 child: Container(
-                  color: AppColors.light,
+                  color: _appTheme.colors.light,
                   child: ListView.builder(
                       itemCount: _viewModel.getListLength(),
                       itemBuilder: (BuildContext context, int index) {
@@ -129,22 +130,22 @@ class _TablePageState extends State<TablePage> {
                                     Expanded(
                                       child: Text(
                                         _viewModel.getRegion(index),
-                                        style: AppStyles.textDark,
+                                        style: _appTheme.textDark,
                                       ),
                                       flex: 20,
                                     ),
                                     Expanded(
                                       child: Text(
                                         _viewModel.getPredictedCasesAt(index),
-                                        style: AppStyles.textDark
-                                            .copyWith(color: AppColors.accent),
+                                        style: _appTheme.textDark.copyWith(
+                                            color: _appTheme.colors.accent),
                                       ),
                                       flex: 20,
                                     ),
                                     Expanded(
                                       child: Text(
                                         _viewModel.getRealCasesAt(index),
-                                        style: AppStyles.textDark,
+                                        style: _appTheme.textDark,
                                       ),
                                       flex: 12,
                                     ),
@@ -153,7 +154,7 @@ class _TablePageState extends State<TablePage> {
                               ),
                               Container(
                                 height: 1.0,
-                                color: AppColors.gray,
+                                color: _appTheme.colors.gray,
                               ),
                             ],
                           ),

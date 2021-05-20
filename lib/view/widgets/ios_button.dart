@@ -1,5 +1,3 @@
-import 'package:covid_prediction_app_ios/utils/app_colors.dart';
-import 'package:covid_prediction_app_ios/utils/app_styles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -13,16 +11,28 @@ class IosButton extends StatelessWidget {
   final double height;
 
   final TextStyle textStyle;
+  final TextStyle disabledTextStyle;
   final Color backgroundColor;
-  final bool disabledColor;
+  final Color disabledColor;
+  final bool disabled;
 
   IosButton({
     @required this.onPressed,
     @required this.text,
     this.iconData,
-    this.backgroundColor = AppColors.accent,
-    this.textStyle = AppStyles.textButton,
-    this.disabledColor = false,
+    this.backgroundColor = const Color(0xff0A64EC),
+    this.disabledColor = const Color(0xfff4f4f4),
+    this.textStyle = const TextStyle(
+      fontSize: 17.0,
+      fontWeight: FontWeight.w600,
+      color: Colors.white,
+    ),
+    this.disabledTextStyle = const TextStyle(
+      fontSize: 17.0,
+      color: Color(0xff7A7A7A),
+      fontWeight: FontWeight.normal,
+    ),
+    this.disabled = false,
     this.radius = 9.0,
     this.elevation = 0.0,
     this.height = 36.0,
@@ -51,21 +61,16 @@ class IosButton extends StatelessWidget {
             /// * * * * * * TEXT * * * * * *
             Text(
               text,
-              style: !disabledColor
-                  ? textStyle
-                  : textStyle.copyWith(
-                      color: AppColors.textLight,
-                      fontWeight: FontWeight.normal,
-                    ),
+              style: !disabled ? textStyle : disabledTextStyle,
             ),
           ],
         ),
       ),
       style: ButtonStyle(
         elevation: MaterialStateProperty.all<double>(elevation),
-        backgroundColor: !disabledColor
+        backgroundColor: !disabled
             ? MaterialStateProperty.all<Color>(backgroundColor)
-            : MaterialStateProperty.all<Color>(AppColors.gray),
+            : MaterialStateProperty.all<Color>(disabledColor),
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
           RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(radius),

@@ -1,12 +1,10 @@
-import 'package:covid_prediction_app_ios/utils/app_colors.dart';
-import 'package:covid_prediction_app_ios/utils/app_styles.dart';
 import 'package:covid_prediction_app_ios/utils/constants.dart';
 import 'package:covid_prediction_app_ios/utils/strings.dart';
 import 'package:covid_prediction_app_ios/view/widgets/ios_back_button.dart';
 import 'package:covid_prediction_app_ios/view/widgets/ios_button.dart';
 import 'package:covid_prediction_app_ios/view/widgets/ios_textfield.dart';
 import 'package:covid_prediction_app_ios/view/widgets/w_chart.dart';
-import 'package:covid_prediction_app_ios/view/widgets/w_data.dart';
+import 'package:covid_prediction_app_ios/viewmodels/app_theme.dart';
 import 'package:covid_prediction_app_ios/viewmodels/chart_vm.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -19,11 +17,13 @@ class ChartPage extends StatefulWidget {
 
 class _ChartPageState extends State<ChartPage> {
   ChartViewModel _viewModel;
+  AppTheme _appTheme;
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     _viewModel = Provider.of<ChartViewModel>(context);
+    _appTheme = Provider.of<AppTheme>(context);
   }
 
   @override
@@ -34,18 +34,18 @@ class _ChartPageState extends State<ChartPage> {
         title: Text(
           Strings.chart,
           style: TextStyle(
-            color: AppColors.textDark,
+            color: _appTheme.colors.textDark,
             fontWeight: FontWeight.bold,
           ),
         ),
         centerTitle: true,
         elevation: 0.0,
-        backgroundColor: AppColors.gray,
+        backgroundColor: _appTheme.colors.gray,
         leading: IosBackButton(onPressed: () => Navigator.of(context).pop()),
       ),
       body: SingleChildScrollView(
         child: Container(
-          color: AppColors.gray,
+          color: _appTheme.colors.gray,
           child: Padding(
             padding: EdgeInsets.fromLTRB(
               Constants.screenPadding,
@@ -69,7 +69,7 @@ class _ChartPageState extends State<ChartPage> {
                 SizedBox(height: Constants.screenPadding),
 
                 Container(
-                  decoration: AppStyles.defaultBoxDecoration,
+                  decoration: _appTheme.defaultBoxDecoration,
                   child: Padding(
                     padding: EdgeInsets.symmetric(
                       horizontal: Constants.screenPadding,
@@ -86,11 +86,11 @@ class _ChartPageState extends State<ChartPage> {
                               children: [
                                 Text(
                                   _viewModel.getCurrentPredicted(),
-                                  style: AppStyles.textChartValue,
+                                  style: _appTheme.textChartValue,
                                 ),
                                 Text(
                                   Strings.predicted,
-                                  style: AppStyles.textLight
+                                  style: _appTheme.textLight
                                       .copyWith(fontSize: 12.0),
                                 ),
                               ],
@@ -99,7 +99,7 @@ class _ChartPageState extends State<ChartPage> {
                             /// * * * DATE * * *
                             Text(
                               _viewModel.getCurrentOutputDate(),
-                              style: AppStyles.textChartData,
+                              style: _appTheme.textChartData,
                             ),
 
                             /// * * * REAL * * *
@@ -107,11 +107,11 @@ class _ChartPageState extends State<ChartPage> {
                               children: [
                                 Text(
                                   _viewModel.getCurrentReal(),
-                                  style: AppStyles.textChartValue,
+                                  style: _appTheme.textChartValue,
                                 ),
                                 Text(
                                   Strings.real,
-                                  style: AppStyles.textLight
+                                  style: _appTheme.textLight
                                       .copyWith(fontSize: 12.0),
                                 ),
                               ],
@@ -129,8 +129,9 @@ class _ChartPageState extends State<ChartPage> {
                           height: MediaQuery.of(context).size.height / 2,
                           values: _viewModel.getOutputCases(),
                           onPressed: _viewModel.changeIndex,
-                          barColor: AppColors.accentLight,
-                          selectedBarColor: AppColors.accent,
+                          barColor: _appTheme.colors.accentLight,
+                          selectedBarColor: _appTheme.colors.accent,
+                          backgroundColor: _appTheme.colors.light,
                         ),
 
                         SizedBox(
@@ -139,8 +140,8 @@ class _ChartPageState extends State<ChartPage> {
 
                         /// * * * * * CHART SETTINGS * * * * *
                         Container(
-                          decoration: AppStyles.defaultBoxDecoration.copyWith(
-                            color: AppColors.gray,
+                          decoration: _appTheme.defaultBoxDecoration.copyWith(
+                            color: _appTheme.colors.gray,
                           ),
                           child: Row(
                               children: _viewModel.availableIntervals
@@ -152,9 +153,10 @@ class _ChartPageState extends State<ChartPage> {
                                           onPressed: () {
                                             _viewModel.changeInterval(interval);
                                           },
-                                          disabledColor:
+                                          disabled:
                                               _viewModel.currentInterval !=
                                                   interval,
+                                          disabledColor: _appTheme.colors.gray,
                                           text: _viewModel
                                               .formatChartInterval(interval),
                                         ),
@@ -176,7 +178,8 @@ class _ChartPageState extends State<ChartPage> {
                                 onPressed: () {
                                   _viewModel.changePredicted(true);
                                 },
-                                disabledColor: !_viewModel.showPredicted,
+                                disabled: !_viewModel.showPredicted,
+                                disabledColor: _appTheme.colors.gray,
                                 text: Strings.predicted,
                               ),
                             ),
@@ -190,7 +193,8 @@ class _ChartPageState extends State<ChartPage> {
                                 onPressed: () {
                                   _viewModel.changePredicted(false);
                                 },
-                                disabledColor: _viewModel.showPredicted,
+                                disabled: _viewModel.showPredicted,
+                                disabledColor: _appTheme.colors.gray,
                                 text: Strings.real,
                               ),
                             ),

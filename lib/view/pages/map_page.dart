@@ -1,9 +1,8 @@
-import 'package:covid_prediction_app_ios/utils/app_colors.dart';
-import 'package:covid_prediction_app_ios/utils/app_styles.dart';
 import 'package:covid_prediction_app_ios/utils/constants.dart';
 import 'package:covid_prediction_app_ios/utils/strings.dart';
 import 'package:covid_prediction_app_ios/view/widgets/ios_back_button.dart';
 import 'package:covid_prediction_app_ios/view/widgets/ios_button.dart';
+import 'package:covid_prediction_app_ios/viewmodels/app_theme.dart';
 import 'package:covid_prediction_app_ios/viewmodels/map_vm.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -17,12 +16,14 @@ class MapPage extends StatefulWidget {
 
 class _MapPageState extends State<MapPage> {
   MapViewModel _viewModel;
+  AppTheme _appTheme;
   MapShapeSource _dataSource;
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     _viewModel = Provider.of<MapViewModel>(context);
+    _appTheme = Provider.of<AppTheme>(context);
     _dataSource = MapShapeSource.asset(
       "assets/world.json",
       shapeDataField: "name",
@@ -39,11 +40,11 @@ class _MapPageState extends State<MapPage> {
       /// * * * * * APP BAR * * * * *
       appBar: AppBar(
         elevation: 0.0,
-        backgroundColor: AppColors.gray,
+        backgroundColor: _appTheme.colors.gray,
         title: Text(
           Strings.worldMap,
           style: TextStyle(
-            color: AppColors.textDark,
+            color: _appTheme.colors.textDark,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -51,7 +52,7 @@ class _MapPageState extends State<MapPage> {
         leading: IosBackButton(onPressed: () => Navigator.of(context).pop()),
       ),
       body: Container(
-        color: AppColors.gray,
+        color: _appTheme.colors.gray,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -80,7 +81,7 @@ class _MapPageState extends State<MapPage> {
             /// * * * * * WORLD MAP * * * * *
             Expanded(
               child: Container(
-                color: AppColors.light,
+                color: _appTheme.colors.light,
                 child: SfMaps(
                   layers: [
                     MapShapeLayer(
@@ -88,9 +89,9 @@ class _MapPageState extends State<MapPage> {
                       bubbleSettings: MapBubbleSettings(
                         maxRadius: 30,
                         minRadius: 15,
-                        color: AppColors.accent.withOpacity(0.5),
+                        color: _appTheme.colors.accent.withOpacity(0.5),
                       ),
-                      color: AppColors.accentLight,
+                      color: _appTheme.colors.accentLight,
                       bubbleTooltipBuilder: (
                         BuildContext context,
                         int index,
@@ -100,7 +101,7 @@ class _MapPageState extends State<MapPage> {
                           child: Text(
                             'Region: ${_viewModel.getPrimaryValueMapper(index)}'
                             '\nCases: ${_viewModel.getBubbleSizeMapper(index).toInt()}',
-                            style: AppStyles.textButton
+                            style: _appTheme.textButton
                                 .copyWith(fontWeight: FontWeight.normal),
                           ),
                         );
@@ -117,7 +118,7 @@ class _MapPageState extends State<MapPage> {
 
             /// * * * * * SETTINGS * * * * *
             Container(
-              color: AppColors.light,
+              color: _appTheme.colors.light,
               child: Padding(
                 padding: EdgeInsets.symmetric(
                   horizontal: Constants.screenPadding,
@@ -131,7 +132,8 @@ class _MapPageState extends State<MapPage> {
                         onPressed: () {
                           _viewModel.changePredicted(true);
                         },
-                        disabledColor: _viewModel.showPredicted ? false : true,
+                        disabled: _viewModel.showPredicted ? false : true,
+                        disabledColor: _appTheme.colors.gray,
                         text: Strings.predicted,
                       ),
                     ),
@@ -145,7 +147,8 @@ class _MapPageState extends State<MapPage> {
                         onPressed: () {
                           _viewModel.changePredicted(false);
                         },
-                        disabledColor: _viewModel.showPredicted ? true : false,
+                        disabled: _viewModel.showPredicted ? true : false,
+                        disabledColor: _appTheme.colors.gray,
                         text: Strings.real,
                       ),
                     ),

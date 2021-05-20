@@ -1,4 +1,5 @@
 import 'package:covid_prediction_app_ios/singleton.dart';
+import 'package:covid_prediction_app_ios/utils/app_colors.dart';
 import 'package:covid_prediction_app_ios/view/pages/chart_page.dart';
 import 'package:covid_prediction_app_ios/view/pages/map_page.dart';
 import 'package:covid_prediction_app_ios/view/pages/table_page.dart';
@@ -9,6 +10,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'app_theme.dart';
+
 class MainViewModel extends ChangeNotifier {
   String _defaultRegion = 'Poland';
   String get defaultRegion => _defaultRegion;
@@ -17,9 +20,12 @@ class MainViewModel extends ChangeNotifier {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => ChangeNotifierProvider<TableViewModel>(
-          create: (context) => TableViewModel(),
-          builder: (context, widget) => TablePage(),
+        builder: (context) => MultiProvider(
+          providers: [
+            ChangeNotifierProvider(create: (_) => TableViewModel()),
+            ChangeNotifierProvider(create: (_) => AppTheme()),
+          ],
+          child: TablePage(),
         ),
       ),
     );
@@ -29,9 +35,12 @@ class MainViewModel extends ChangeNotifier {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => ChangeNotifierProvider<MapViewModel>(
-          create: (context) => MapViewModel(),
-          builder: (context, widget) => MapPage(),
+        builder: (context) => MultiProvider(
+          providers: [
+            ChangeNotifierProvider(create: (_) => MapViewModel()),
+            ChangeNotifierProvider(create: (_) => AppTheme()),
+          ],
+          child: MapPage(),
         ),
       ),
     );
@@ -41,9 +50,12 @@ class MainViewModel extends ChangeNotifier {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => ChangeNotifierProvider<ChartViewModel>(
-          create: (context) => ChartViewModel(),
-          builder: (context, widget) => ChartPage(),
+        builder: (context) => MultiProvider(
+          providers: [
+            ChangeNotifierProvider(create: (_) => ChartViewModel()),
+            ChangeNotifierProvider(create: (_) => AppTheme()),
+          ],
+          child: ChartPage(),
         ),
       ),
     );
