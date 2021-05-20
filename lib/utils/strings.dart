@@ -23,4 +23,7 @@ class Strings {
 
   // ChartPage
   static const String search = 'Search';
+
+  // SelectRegionPage
+  static const String selectRegion = 'Select region';
 }

@@ -106,55 +106,59 @@ class _MainPageState extends State<MainPage> {
               ),
 
               /// - - - - - - CASES TODAY - - - - - -
-              Container(
-                child: Column(
-                  children: [
-                    /// - - - - - HEAD - - - - -
-                    Text(
-                      '${Strings.casesToday} (${_viewModel.defaultRegion})',
-                      style: TextStyle(
-                        color: Colors.black87,
-                        fontSize: 18.0,
+              Visibility(
+                visible:
+                    MediaQuery.of(context).orientation == Orientation.portrait,
+                child: Container(
+                  child: Column(
+                    children: [
+                      /// - - - - - HEAD - - - - -
+                      Text(
+                        '${Strings.casesToday} (${_viewModel.defaultRegion})',
+                        style: TextStyle(
+                          color: Colors.black87,
+                          fontSize: 18.0,
+                        ),
                       ),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        /// - - - - - REAL - - - - -
-                        Column(
-                          children: [
-                            Text(
-                              _viewModel.getPredictedCasesToday().toString(),
-                              style: _appTheme.casesStyle,
-                            ),
-                            Text(
-                              Strings.real,
-                              style:
-                                  _appTheme.textLight.copyWith(fontSize: 16.0),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          width: 24.0,
-                        ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          /// - - - - - REAL - - - - -
+                          Column(
+                            children: [
+                              Text(
+                                _viewModel.getPredictedCasesToday().toString(),
+                                style: _appTheme.casesStyle,
+                              ),
+                              Text(
+                                Strings.real,
+                                style: _appTheme.textLight
+                                    .copyWith(fontSize: 16.0),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            width: 24.0,
+                          ),
 
-                        /// - - - - - PREDICTED - - - - -
-                        Column(
-                          children: [
-                            Text(
-                              _viewModel.getRealCasesToday().toString(),
-                              style: _appTheme.casesStyle,
-                            ),
-                            Text(
-                              Strings.predicted,
-                              style:
-                                  _appTheme.textLight.copyWith(fontSize: 16.0),
-                            ),
-                          ],
-                        ),
-                      ],
-                    )
-                  ],
+                          /// - - - - - PREDICTED - - - - -
+                          Column(
+                            children: [
+                              Text(
+                                _viewModel.getRealCasesToday().toString(),
+                                style: _appTheme.casesStyle,
+                              ),
+                              Text(
+                                Strings.predicted,
+                                style: _appTheme.textLight
+                                    .copyWith(fontSize: 16.0),
+                              ),
+                            ],
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
                 ),
               ),
             ],

@@ -1,5 +1,5 @@
 import 'package:covid_prediction_app_ios/services/storage_manager.dart';
-import 'package:covid_prediction_app_ios/singleton.dart';
+import 'file:///D:/Dev/GitHub/covid-predictor-app-ios/lib/services/app_prefs.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -34,7 +34,7 @@ class AppTheme extends ChangeNotifier {
   String _storageKey = 'dark_mode';
 
   AppTheme() {
-    if (Singleton.darkMode == null) {
+    if (AppPreferences.darkMode == null) {
       // Dark mode did not read yet
       StorageManager.readBoolData(_storageKey).then((value) {
         if (value == null) {
@@ -45,18 +45,18 @@ class AppTheme extends ChangeNotifier {
         } else {
           _darkModeOn = value;
         }
-        Singleton.darkMode = _darkModeOn;
+        AppPreferences.darkMode = _darkModeOn;
         notifyListeners();
       });
     } else {
       // Dark mode was read while using the app
-      _darkModeOn = Singleton.darkMode;
+      _darkModeOn = AppPreferences.darkMode;
     }
   }
 
   void toggleDarkMode() {
     _darkModeOn = !_darkModeOn;
-    Singleton.darkMode = _darkModeOn;
+    AppPreferences.darkMode = _darkModeOn;
     notifyListeners();
     StorageManager.saveData(_storageKey, _darkModeOn);
   }

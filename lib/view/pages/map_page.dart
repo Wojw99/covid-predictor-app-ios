@@ -9,6 +9,98 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_maps/maps.dart';
 
+class LandscapeView extends StatefulWidget {
+  @override
+  _LandscapeViewState createState() => _LandscapeViewState();
+}
+
+class _LandscapeViewState extends State<LandscapeView> {
+  MapViewModel _viewModel;
+  AppTheme _appTheme;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _viewModel = Provider.of<MapViewModel>(context);
+    _appTheme = Provider.of<AppTheme>(context);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Visibility(
+      visible: MediaQuery.of(context).orientation == Orientation.landscape,
+      child: Row(
+        children: [
+          /// * * * * * BACK BUTTON * * * * *
+          IosBackButton(onPressed: () => Navigator.of(context).pop()),
+
+          /// * * * * * BUTTON DATE * * * * *
+          Expanded(
+            child: IosButton(
+              onPressed: () {
+                showDatePicker(
+                  context: context,
+                  initialDate: _viewModel.selectedDate,
+                  firstDate: _viewModel.getFirstDate(),
+                  lastDate: _viewModel.getLastDate(),
+                ).then((value) => _viewModel.changeDate(value));
+              },
+              text: _viewModel.selectedDateString,
+              iconData: Icons.calendar_today,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class PortraitView extends StatefulWidget {
+  @override
+  _PortraitViewState createState() => _PortraitViewState();
+}
+
+class _PortraitViewState extends State<PortraitView> {
+  MapViewModel _viewModel;
+  AppTheme _appTheme;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _viewModel = Provider.of<MapViewModel>(context);
+    _appTheme = Provider.of<AppTheme>(context);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Visibility(
+      visible: MediaQuery.of(context).orientation == Orientation.portrait,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          /// * * * * * BACK BUTTON * * * * *
+          IosBackButton(onPressed: () => Navigator.of(context).pop()),
+
+          /// * * * * * BUTTON DATE * * * * *
+          IosButton(
+            onPressed: () {
+              showDatePicker(
+                context: context,
+                initialDate: _viewModel.selectedDate,
+                firstDate: _viewModel.getFirstDate(),
+                lastDate: _viewModel.getLastDate(),
+              ).then((value) => _viewModel.changeDate(value));
+            },
+            text: _viewModel.selectedDateString,
+            iconData: Icons.calendar_today,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 class MapPage extends StatefulWidget {
   @override
   _MapPageState createState() => _MapPageState();
@@ -37,126 +129,175 @@ class _MapPageState extends State<MapPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      /// * * * * * APP BAR * * * * *
-      appBar: AppBar(
-        elevation: 0.0,
-        backgroundColor: _appTheme.colors.gray,
-        title: Text(
-          Strings.worldMap,
-          style: TextStyle(
-            color: _appTheme.colors.textDark,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        centerTitle: true,
-        leading: IosBackButton(onPressed: () => Navigator.of(context).pop()),
-      ),
-      body: Container(
-        color: _appTheme.colors.gray,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            /// * * * * * BUTTON DATE * * * * *
-            Padding(
-              padding: EdgeInsets.fromLTRB(
-                Constants.screenPadding,
-                0,
-                Constants.screenPadding,
-                Constants.screenPadding / 2,
-              ),
-              child: IosButton(
-                onPressed: () {
-                  showDatePicker(
-                    context: context,
-                    initialDate: _viewModel.selectedDate,
-                    firstDate: _viewModel.getFirstDate(),
-                    lastDate: _viewModel.getLastDate(),
-                  ).then((value) => _viewModel.changeDate(value));
-                },
-                text: _viewModel.selectedDateString,
-                iconData: Icons.calendar_today,
-              ),
-            ),
+      body: SafeArea(
+        child: Container(
+          color: _appTheme.colors.gray,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              /// * * * * * BUTTON DATE * * * * *
+              // Padding(
+              //   padding: EdgeInsets.fromLTRB(
+              //     Constants.screenPadding,
+              //     0,
+              //     Constants.screenPadding,
+              //     Constants.screenPadding / 2,
+              //   ),
+              //   child: IosButton(
+              //     onPressed: () {
+              //       showDatePicker(
+              //         context: context,
+              //         initialDate: _viewModel.selectedDate,
+              //         firstDate: _viewModel.getFirstDate(),
+              //         lastDate: _viewModel.getLastDate(),
+              //       ).then((value) => _viewModel.changeDate(value));
+              //     },
+              //     text: _viewModel.selectedDateString,
+              //     iconData: Icons.calendar_today,
+              //   ),
+              // ),
 
-            /// * * * * * WORLD MAP * * * * *
-            Expanded(
-              child: Container(
-                color: _appTheme.colors.light,
-                child: SfMaps(
-                  layers: [
-                    MapShapeLayer(
-                      source: _dataSource,
-                      bubbleSettings: MapBubbleSettings(
-                        maxRadius: 30,
-                        minRadius: 15,
-                        color: _appTheme.colors.accent.withOpacity(0.5),
-                      ),
-                      color: _appTheme.colors.accentLight,
-                      bubbleTooltipBuilder: (
-                        BuildContext context,
-                        int index,
-                      ) {
-                        return Padding(
-                          padding: EdgeInsets.all(10.0),
-                          child: Text(
-                            'Region: ${_viewModel.getPrimaryValueMapper(index)}'
-                            '\nCases: ${_viewModel.getBubbleSizeMapper(index).toInt()}',
-                            style: _appTheme.textButton
-                                .copyWith(fontWeight: FontWeight.normal),
+              /// * * * * * WORLD MAP * * * * *
+              Expanded(
+                child: Container(
+                  color: _appTheme.colors.light,
+                  child: Stack(
+                    children: [
+                      SfMaps(
+                        layers: [
+                          MapShapeLayer(
+                            source: _dataSource,
+                            bubbleSettings: MapBubbleSettings(
+                              maxRadius: 30,
+                              minRadius: 15,
+                              color: _appTheme.colors.accent.withOpacity(0.5),
+                            ),
+                            color: _appTheme.colors.accentLight,
+                            bubbleTooltipBuilder: (
+                              BuildContext context,
+                              int index,
+                            ) {
+                              return Padding(
+                                padding: EdgeInsets.all(10.0),
+                                child: Text(
+                                  'Region: ${_viewModel.getPrimaryValueMapper(index)}'
+                                  '\nCases: ${_viewModel.getBubbleSizeMapper(index).toInt()}',
+                                  style: _appTheme.textButton
+                                      .copyWith(fontWeight: FontWeight.normal),
+                                ),
+                              );
+                            },
+                            zoomPanBehavior: MapZoomPanBehavior(
+                              enablePanning: true,
+                              enableDoubleTapZooming: true,
+                            ),
                           ),
-                        );
-                      },
-                      zoomPanBehavior: MapZoomPanBehavior(
-                        enablePanning: true,
-                        enableDoubleTapZooming: true,
+                        ],
                       ),
-                    ),
-                  ],
+
+                      /// * * * * * SETTINGS * * * * *
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(
+                          Constants.screenPadding / 2,
+                          Constants.screenPadding / 3,
+                          Constants.screenPadding / 2,
+                          Constants.screenPadding / 3,
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Stack(
+                              children: [
+                                LandscapeView(),
+                                PortraitView(),
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                /// * * * PREDICTED * * *
+                                Expanded(
+                                  child: IosButton(
+                                    onPressed: () {
+                                      _viewModel.changePredicted(true);
+                                    },
+                                    disabled:
+                                        _viewModel.showPredicted ? false : true,
+                                    disabledColor: _appTheme.colors.gray,
+                                    text: Strings.predicted,
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 10.0,
+                                ),
+
+                                /// * * * REAL * * *
+                                Expanded(
+                                  child: IosButton(
+                                    onPressed: () {
+                                      _viewModel.changePredicted(false);
+                                    },
+                                    disabled:
+                                        _viewModel.showPredicted ? true : false,
+                                    disabledColor: _appTheme.colors.gray,
+                                    text: Strings.real,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
 
-            /// * * * * * SETTINGS * * * * *
-            Container(
-              color: _appTheme.colors.light,
-              child: Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: Constants.screenPadding,
-                  vertical: Constants.screenPadding / 3,
-                ),
-                child: Row(
-                  children: [
-                    /// * * * PREDICTED * * *
-                    Expanded(
-                      child: IosButton(
-                        onPressed: () {
-                          _viewModel.changePredicted(true);
-                        },
-                        disabled: _viewModel.showPredicted ? false : true,
-                        disabledColor: _appTheme.colors.gray,
-                        text: Strings.predicted,
-                      ),
-                    ),
-                    SizedBox(
-                      width: 10.0,
-                    ),
-
-                    /// * * * REAL * * *
-                    Expanded(
-                      child: IosButton(
-                        onPressed: () {
-                          _viewModel.changePredicted(false);
-                        },
-                        disabled: _viewModel.showPredicted ? true : false,
-                        disabledColor: _appTheme.colors.gray,
-                        text: Strings.real,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ],
+              /// * * * * * SETTINGS * * * * *
+              // Visibility(
+              //   visible:
+              //       MediaQuery.of(context).orientation == Orientation.portrait,
+              //   child: Container(
+              //     color: _appTheme.colors.light,
+              //     child: Padding(
+              //       padding: EdgeInsets.symmetric(
+              //         horizontal: Constants.screenPadding,
+              //         vertical: Constants.screenPadding / 3,
+              //       ),
+              //       child: Row(
+              //         children: [
+              //           /// * * * PREDICTED * * *
+              //           Expanded(
+              //             child: IosButton(
+              //               onPressed: () {
+              //                 _viewModel.changePredicted(true);
+              //               },
+              //               disabled: _viewModel.showPredicted ? false : true,
+              //               disabledColor: _appTheme.colors.gray,
+              //               text: Strings.predicted,
+              //             ),
+              //           ),
+              //           SizedBox(
+              //             width: 10.0,
+              //           ),
+              //
+              //           /// * * * REAL * * *
+              //           Expanded(
+              //             child: IosButton(
+              //               onPressed: () {
+              //                 _viewModel.changePredicted(false);
+              //               },
+              //               disabled: _viewModel.showPredicted ? true : false,
+              //               disabledColor: _appTheme.colors.gray,
+              //               text: Strings.real,
+              //             ),
+              //           ),
+              //         ],
+              //       ),
+              //     ),
+              //   ),
+              // ),
+            ],
+          ),
         ),
       ),
     );

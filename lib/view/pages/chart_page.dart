@@ -56,14 +56,13 @@ class _ChartPageState extends State<ChartPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                /// * * * * * TEXT FIELD REGION * * * * *
-                IosTextField(
+                /// * * * * * BUTTON REGION * * * * *
+                IosButton(
                   iconData: Icons.search,
-                  hintText: Strings.search,
-                  initialValue: _viewModel.currentRegion,
-                  onChanged: (value) {
-                    _viewModel.changeRegion(value);
+                  onPressed: () {
+                    _viewModel.navigateToSelectRegionPage(context);
                   },
+                  text: _viewModel.currentRegion,
                 ),
 
                 SizedBox(height: Constants.screenPadding),

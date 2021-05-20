@@ -1,11 +1,11 @@
 import 'package:covid_prediction_app_ios/models/region.dart';
 import 'package:flutter/cupertino.dart';
 
-import '../singleton.dart';
+import '../services/app_prefs.dart';
 
 class MapViewModel extends ChangeNotifier {
-  List<Region> _predictionList = Singleton.predictionList;
-  List<Region> _realList = Singleton.realList;
+  List<Region> _predictionList = AppPreferences.predictionList;
+  List<Region> _realList = AppPreferences.realList;
 
   List<Region> get predictionList => _predictionList;
   List<Region> get realList => _realList;

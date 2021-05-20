@@ -10,6 +10,7 @@ class WChart extends StatefulWidget {
   final Color barColor;
   final Color selectedBarColor;
   final double barRadiusValue;
+  final int initialIndex;
 
   WChart({
     this.values = const [],
@@ -20,6 +21,7 @@ class WChart extends StatefulWidget {
     this.barColor = Colors.grey,
     this.selectedBarColor = Colors.blue,
     this.barRadiusValue = 9.0,
+    this.initialIndex = 0,
   });
 
   @override
@@ -30,57 +32,77 @@ class _WChartState extends State<WChart> {
   int tappedIndex = 0;
 
   @override
+  void initState() {
+    tappedIndex = widget.initialIndex;
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final maxVal = widget.values.isNotEmpty ? findMaxValue() : 0;
     final minVal = widget.values.isNotEmpty ? findMinValue() : 0;
     final valuesSize = widget.values.length;
     final valuesMap = widget.values.asMap();
-    return Container(
-      height: widget.height,
-      width: widget.width,
-      color: widget.backgroundColor,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: valuesMap.entries.map((entry) {
-          final shift = minVal / 1.03;
-          final filledHeight =
-              ((entry.value - shift) * widget.height) / (maxVal - shift);
-          return GestureDetector(
-            onTap: () {
-              setState(() {
-                tappedIndex = entry.key;
-              });
-              widget.onPressed(entry.key, entry.value);
-            },
-            child: Stack(
-              alignment: Alignment.bottomCenter,
-              children: [
-                /// REST OF SPACE
-                Container(
-                  color: widget.backgroundColor,
-                  height: widget.height,
-                  width: widget.width / valuesSize,
-                ),
+    final barWidth = widget.width / valuesSize;
+    return GestureDetector(
+      onHorizontalDragUpdate: (details) {
+        final x = details.localPosition.dx;
+        final index = x ~/ barWidth; // equals to (x / barWidth).toInt()
+        // print('$x / $barWidth = ${x / barWidth} so i = ${index}');
+        setState(() {
+          tappedIndex = index;
+        });
+        if (index < valuesSize && index >= 0) {
+          widget.onPressed(index, widget.values[index]);
+        }
+      },
+      child: Container(
+        height: widget.height,
+        width: widget.width,
+        color: widget.backgroundColor,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: valuesMap.entries.map((entry) {
+            final shift = minVal / 1.03;
+            final filledHeight =
+                ((entry.value - shift) * widget.height) / (maxVal - shift);
+            return GestureDetector(
+              onTap: () {
+                setState(() {
+                  tappedIndex = entry.key;
+                });
+                widget.onPressed(entry.key, entry.value);
+              },
+              child: Stack(
+                alignment: Alignment.bottomCenter,
+                children: [
+                  /// REST OF SPACE
+                  Container(
+                    color: widget.backgroundColor,
+                    height: widget.height,
+                    width: widget.width / valuesSize,
+                  ),
 
-                /// * * * FILLED * * *
-                Container(
-                  width: widget.width / valuesSize,
-                  height: filledHeight,
-                  decoration: BoxDecoration(
-                    color: entry.key == tappedIndex
-                        ? widget.selectedBarColor
-                        : widget.barColor,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(widget.barRadiusValue),
-                      topRight: Radius.circular(widget.barRadiusValue),
+                  /// * * * FILLED * * *
+                  Container(
+                    width: widget.width / valuesSize,
+                    height: filledHeight,
+                    decoration: BoxDecoration(
+                      color: entry.key == tappedIndex
+                          ? widget.selectedBarColor
+                          : widget.barColor,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(widget.barRadiusValue),
+                        topRight: Radius.circular(widget.barRadiusValue),
+                      ),
                     ),
                   ),
-                ),
-              ],
-            ),
-          );
-        }).toList(),
+                ],
+              ),
+            );
+          }).toList(),
+        ),
       ),
     );
   }

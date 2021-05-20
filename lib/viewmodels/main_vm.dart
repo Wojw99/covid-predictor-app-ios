@@ -1,4 +1,4 @@
-import 'package:covid_prediction_app_ios/singleton.dart';
+import 'package:covid_prediction_app_ios/services/app_prefs.dart';
 import 'package:covid_prediction_app_ios/utils/app_colors.dart';
 import 'package:covid_prediction_app_ios/view/pages/chart_page.dart';
 import 'package:covid_prediction_app_ios/view/pages/map_page.dart';
@@ -62,7 +62,7 @@ class MainViewModel extends ChangeNotifier {
   }
 
   int getPredictedCasesToday() {
-    final poland = Singleton.predictionList
+    final poland = AppPreferences.predictionList
         .where((element) => element.region == defaultRegion)
         .toList()
         .first;
@@ -70,7 +70,7 @@ class MainViewModel extends ChangeNotifier {
   }
 
   int getRealCasesToday() {
-    final poland = Singleton.realList
+    final poland = AppPreferences.realList
         .where((element) => element.region == defaultRegion)
         .toList()
         .first;

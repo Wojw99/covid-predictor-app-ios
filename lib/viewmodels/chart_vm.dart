@@ -1,12 +1,17 @@
 import 'package:covid_prediction_app_ios/models/output.dart';
 import 'package:covid_prediction_app_ios/models/region.dart';
+import 'package:covid_prediction_app_ios/view/pages/select_region_page.dart';
+import 'package:covid_prediction_app_ios/viewmodels/select_region_vm.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-import '../singleton.dart';
+import '../services/app_prefs.dart';
+import 'app_theme.dart';
 
 class ChartViewModel extends ChangeNotifier {
-  List<Region> _predictionList = Singleton.predictionList;
-  List<Region> _realList = Singleton.realList;
+  List<Region> _predictionList = AppPreferences.predictionList;
+  List<Region> _realList = AppPreferences.realList;
 
   String _currentRegion = 'Poland';
   String get currentRegion => _currentRegion;
@@ -27,7 +32,7 @@ class ChartViewModel extends ChangeNotifier {
   List<ChartInterval> _availableIntervals = [
     ChartInterval.oneWeek,
     ChartInterval.oneMonth,
-    ChartInterval.ThreeMonths,
+    ChartInterval.threeMonths,
     ChartInterval.sixMonths,
     ChartInterval.oneYear,
   ];
@@ -72,7 +77,7 @@ class ChartViewModel extends ChangeNotifier {
       return '1w';
     else if (interval == ChartInterval.oneMonth)
       return '1m';
-    else if (interval == ChartInterval.ThreeMonths)
+    else if (interval == ChartInterval.threeMonths)
       return '3m';
     else if (interval == ChartInterval.sixMonths)
       return '6m';
@@ -143,7 +148,10 @@ class ChartViewModel extends ChangeNotifier {
 
   /// Change day (output list index) for which data will be visible
   void changeIndex(int index, double value) {
-    if (index != null) {
+    // Chart widget sends callback every time when GestureDetector detect
+    // long press so incoming index can be same several times. We don't need
+    // to rebuild page every time.
+    if (index != _currentIndex && index != null) {
       _currentIndex = index;
       notifyListeners();
     }
@@ -156,12 +164,32 @@ class ChartViewModel extends ChangeNotifier {
       notifyListeners();
     }
   }
+
+  /// Navigate to select region page and wait for user selection
+  void navigateToSelectRegionPage(BuildContext context) async {
+    final result = await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => MultiProvider(
+          providers: [
+            ChangeNotifierProvider(create: (_) => SelectRegionViewModel()),
+            ChangeNotifierProvider(create: (_) => AppTheme()),
+          ],
+          child: SelectRegionPage(),
+        ),
+      ),
+    );
+    if (result != null) {
+      _currentRegion = result.toString();
+      notifyListeners();
+    }
+  }
 }
 
 enum ChartInterval {
   oneWeek,
   oneMonth,
-  ThreeMonths,
+  threeMonths,
   sixMonths,
   oneYear,
 }

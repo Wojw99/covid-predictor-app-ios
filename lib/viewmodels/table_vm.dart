@@ -1,11 +1,11 @@
 import 'package:covid_prediction_app_ios/models/region.dart';
-import 'package:covid_prediction_app_ios/singleton.dart';
+import 'package:covid_prediction_app_ios/services/app_prefs.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class TableViewModel extends ChangeNotifier {
-  List<Region> _predictionList = Singleton.predictionList;
-  List<Region> _realList = Singleton.realList;
+  List<Region> _predictionList = AppPreferences.predictionList;
+  List<Region> _realList = AppPreferences.realList;
 
   /// For DatePicker
   DateTime get firstDate => _predictionList.first.outputs.first.date;

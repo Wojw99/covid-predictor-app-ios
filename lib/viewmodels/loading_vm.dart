@@ -1,5 +1,5 @@
 import 'package:covid_prediction_app_ios/services/api_service.dart';
-import 'package:covid_prediction_app_ios/singleton.dart';
+import 'package:covid_prediction_app_ios/services/app_prefs.dart';
 import 'package:covid_prediction_app_ios/view/pages/main_page.dart';
 import 'package:covid_prediction_app_ios/viewmodels/main_vm.dart';
 import 'package:flutter/cupertino.dart';
@@ -29,8 +29,8 @@ class LoadingViewModel extends ChangeNotifier {
     try {
       print('loading data...');
       // Fill in singleton lists available for the whole application
-      Singleton.predictionList = await apiService.getPredictionsListTest();
-      Singleton.realList = await apiService.getRealListTest();
+      AppPreferences.predictionList = await apiService.getPredictionsListTest();
+      AppPreferences.realList = await apiService.getRealListTest();
       _success = true;
       print('success!');
     } catch (e) {
