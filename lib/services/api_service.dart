@@ -41,9 +41,6 @@ class ApiService {
     return [
       Region(
         region: 'Poland',
-        lat: 12.2,
-        long: 34.3,
-        predicted: false,
         outputs: [
           Output(date: DateTime.utc(2021, 04, 21), cases: 99),
           Output(date: DateTime.utc(2021, 04, 22), cases: 999),
@@ -53,9 +50,6 @@ class ApiService {
       ),
       Region(
         region: 'Germany',
-        lat: 22.2,
-        long: 34.3,
-        predicted: false,
         outputs: [
           Output(date: DateTime.utc(2021, 04, 21), cases: 11245),
           Output(date: DateTime.utc(2021, 04, 22), cases: 11500),
@@ -68,12 +62,9 @@ class ApiService {
       ),
       Region(
         region: 'United Kingdom',
-        lat: 42.2,
-        long: -34.3,
-        predicted: false,
         outputs: [
-          Output(date: DateTime.utc(2021, 04, 21), cases: 133),
-          Output(date: DateTime.utc(2021, 04, 22), cases: 113),
+          Output(date: DateTime.utc(2021, 04, 21), cases: 1),
+          Output(date: DateTime.utc(2021, 04, 22), cases: 23),
           Output(date: DateTime.utc(2021, 04, 23), cases: 266),
           Output(date: DateTime.utc(2021, 04, 24), cases: 3223),
         ],
@@ -88,9 +79,6 @@ class ApiService {
     return [
       Region(
         region: 'Poland',
-        lat: 12.2,
-        long: 34.3,
-        predicted: true,
         outputs: [
           Output(date: DateTime.utc(2021, 04, 21), cases: 23),
           Output(date: DateTime.utc(2021, 04, 22), cases: 43),
@@ -102,9 +90,6 @@ class ApiService {
       ),
       Region(
         region: 'Germany',
-        lat: 22.2,
-        long: 34.3,
-        predicted: true,
         outputs: [
           Output(date: DateTime.utc(2021, 04, 21), cases: 12330),
           Output(date: DateTime.utc(2021, 04, 22), cases: 11500),
@@ -138,9 +123,6 @@ class ApiService {
       ),
       Region(
         region: 'United Kingdom',
-        lat: 42.2,
-        long: -34.3,
-        predicted: true,
         outputs: [
           Output(date: DateTime.utc(2021, 04, 21), cases: 123),
           Output(date: DateTime.utc(2021, 04, 22), cases: 143),

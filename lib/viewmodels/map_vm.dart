@@ -14,7 +14,7 @@ class MapViewModel extends ChangeNotifier {
   bool get showPredicted => _showPredicted;
 
   /// For button with date
-  DateTime _selectedDate = DateTime.utc(2021, 04, 23);
+  DateTime _selectedDate = DateTime.utc(2021, 03, 23);
   DateTime get selectedDate => _selectedDate;
   String get selectedDateString =>
       '${_selectedDate.day}.${_selectedDate.month}.${_selectedDate.year}';

@@ -27,30 +27,27 @@ class _LandscapeViewState extends State<LandscapeView> {
 
   @override
   Widget build(BuildContext context) {
-    return Visibility(
-      visible: MediaQuery.of(context).orientation == Orientation.landscape,
-      child: Row(
-        children: [
-          /// * * * * * BACK BUTTON * * * * *
-          IosBackButton(onPressed: () => Navigator.of(context).pop()),
+    return Row(
+      children: [
+        /// * * * * * BACK BUTTON * * * * *
+        IosBackButton(onPressed: () => Navigator.of(context).pop()),
 
-          /// * * * * * BUTTON DATE * * * * *
-          Expanded(
-            child: IosButton(
-              onPressed: () {
-                showDatePicker(
-                  context: context,
-                  initialDate: _viewModel.selectedDate,
-                  firstDate: _viewModel.getFirstDate(),
-                  lastDate: _viewModel.getLastDate(),
-                ).then((value) => _viewModel.changeDate(value));
-              },
-              text: _viewModel.selectedDateString,
-              iconData: Icons.calendar_today,
-            ),
+        /// * * * * * BUTTON DATE * * * * *
+        Expanded(
+          child: IosButton(
+            onPressed: () {
+              showDatePicker(
+                context: context,
+                initialDate: _viewModel.selectedDate,
+                firstDate: _viewModel.getFirstDate(),
+                lastDate: _viewModel.getLastDate(),
+              ).then((value) => _viewModel.changeDate(value));
+            },
+            text: _viewModel.selectedDateString,
+            iconData: Icons.calendar_today,
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
@@ -206,12 +203,7 @@ class _MapPageState extends State<MapPage> {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Stack(
-                              children: [
-                                LandscapeView(),
-                                PortraitView(),
-                              ],
-                            ),
+                            LandscapeView(),
                             Row(
                               children: [
                                 /// * * * PREDICTED * * *

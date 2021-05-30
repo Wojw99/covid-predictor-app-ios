@@ -116,7 +116,7 @@ class _MainPageState extends State<MainPage> {
                       Text(
                         '${Strings.casesToday} (${_viewModel.defaultRegion})',
                         style: TextStyle(
-                          color: Colors.black87,
+                          color: _appTheme.colors.textLight,
                           fontSize: 18.0,
                         ),
                       ),
@@ -126,9 +126,14 @@ class _MainPageState extends State<MainPage> {
                           /// - - - - - REAL - - - - -
                           Column(
                             children: [
-                              Text(
-                                _viewModel.getPredictedCasesToday().toString(),
-                                style: _appTheme.casesStyle,
+                              Padding(
+                                padding: EdgeInsets.symmetric(vertical: 5.0),
+                                child: Text(
+                                  _viewModel
+                                      .getPredictedCasesToday()
+                                      .toString(),
+                                  style: _appTheme.casesStyle,
+                                ),
                               ),
                               Text(
                                 Strings.real,
@@ -144,9 +149,12 @@ class _MainPageState extends State<MainPage> {
                           /// - - - - - PREDICTED - - - - -
                           Column(
                             children: [
-                              Text(
-                                _viewModel.getRealCasesToday().toString(),
-                                style: _appTheme.casesStyle,
+                              Padding(
+                                padding: EdgeInsets.symmetric(vertical: 5.0),
+                                child: Text(
+                                  _viewModel.getRealCasesToday().toString(),
+                                  style: _appTheme.casesStyle,
+                                ),
                               ),
                               Text(
                                 Strings.predicted,

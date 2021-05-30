@@ -26,17 +26,22 @@ class LoadingViewModel extends ChangeNotifier {
     final apiService = ApiService();
     _loading = true;
 
-    try {
-      print('loading data...');
-      // Fill in singleton lists available for the whole application
-      AppPreferences.predictionList = await apiService.getPredictionsListTest();
-      AppPreferences.realList = await apiService.getRealListTest();
-      _success = true;
-      print('success!');
-    } catch (e) {
-      _error = true;
-      _errorText = e.toString();
-    }
+    AppPreferences.predictionList = await apiService.getPredictionsList();
+    AppPreferences.realList = await apiService.getPredictionsList();
+    _success = true;
+
+    // try {
+    //   print('loading data...');
+    //   // Fill in singleton lists available for the whole application
+    //   AppPreferences.predictionList = await apiService.getPredictionsList();
+    //   AppPreferences.realList = await apiService.getPredictionsList();
+    //   _success = true;
+    //   print('success!');
+    // } catch (e) {
+    //   _error = true;
+    //   _errorText = e.toString();
+    //   print(e);
+    // }
 
     notifyListeners();
   }

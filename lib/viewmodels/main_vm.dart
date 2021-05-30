@@ -66,7 +66,7 @@ class MainViewModel extends ChangeNotifier {
         .where((element) => element.region == defaultRegion)
         .toList()
         .first;
-    return poland.outputs.first.cases;
+    return poland.outputs.last.cases;
   }
 
   int getRealCasesToday() {
@@ -74,6 +74,6 @@ class MainViewModel extends ChangeNotifier {
         .where((element) => element.region == defaultRegion)
         .toList()
         .first;
-    return poland.outputs.first.cases;
+    return poland.outputs.last.cases;
   }
 }

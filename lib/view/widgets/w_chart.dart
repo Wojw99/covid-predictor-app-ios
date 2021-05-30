@@ -34,6 +34,7 @@ class _WChartState extends State<WChart> {
   @override
   void initState() {
     tappedIndex = widget.initialIndex;
+    checkNegatives();
     super.initState();
   }
 
@@ -105,6 +106,14 @@ class _WChartState extends State<WChart> {
         ),
       ),
     );
+  }
+
+  /// Search for negative values and throw an exception if any are found
+  void checkNegatives() {
+    for (int i = 0; i < widget.values.length; i++) {
+      if (widget.values[i] < 0)
+        throw Exception('Values for chart cannot be less than zero!');
+    }
   }
 
   double findMaxValue() {

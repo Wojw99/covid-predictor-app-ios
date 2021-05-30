@@ -64,7 +64,7 @@ class AppTheme extends ChangeNotifier {
   TextStyle get casesStyle => TextStyle(
         letterSpacing: -1.0,
         color: colors.textDark,
-        fontSize: 50.0,
+        fontSize: 30.0,
         fontWeight: FontWeight.bold,
       );
 

@@ -25,7 +25,7 @@ class ChartViewModel extends ChangeNotifier {
 
   /// Index of currently visible output
   ChartInterval get currentInterval => _currentInterval;
-  ChartInterval _currentInterval = ChartInterval.oneMonth;
+  ChartInterval _currentInterval = ChartInterval.sixMonths;
 
   /// Available intervals
   List<ChartInterval> get availableIntervals => _availableIntervals;
@@ -87,12 +87,14 @@ class ChartViewModel extends ChangeNotifier {
 
   /// Get list of predicted outputs
   List<Output> getPredictedOutputs() {
+    final amount = parseCurrentInterval();
     final region = _predictionList
         .where((element) =>
             element.region.toLowerCase() == _currentRegion.toLowerCase())
         .toList();
     if (region.isNotEmpty) {
-      return region.first.outputs;
+      final len = region.first.outputs.length;
+      return region.first.outputs.sublist(len - amount, len).toList();
     } else {
       return [];
     }
@@ -100,12 +102,14 @@ class ChartViewModel extends ChangeNotifier {
 
   /// Get list of real outputs
   List<Output> getRealOutputs() {
+    final amount = parseCurrentInterval();
     final region = _realList
         .where((element) =>
             element.region.toLowerCase() == _currentRegion.toLowerCase())
         .toList();
     if (region.isNotEmpty) {
-      return region.first.outputs;
+      final len = region.first.outputs.length;
+      return region.first.outputs.sublist(len - amount, len).toList();
     } else {
       return [];
     }
@@ -126,7 +130,21 @@ class ChartViewModel extends ChangeNotifier {
 
   /// Get list of output cases that will be visible on chart
   List<double> getOutputCases() {
-    return getOutputs().map((e) => e.cases.toDouble()).toList();
+    final outputs = getOutputs().map((e) => e.cases.toDouble()).toList();
+    return outputs;
+  }
+
+  int parseCurrentInterval() {
+    if (_currentInterval == ChartInterval.oneWeek)
+      return 7;
+    else if (_currentInterval == ChartInterval.oneMonth)
+      return 30;
+    else if (_currentInterval == ChartInterval.threeMonths)
+      return 92;
+    else if (_currentInterval == ChartInterval.sixMonths)
+      return 183;
+    else
+      return 365; // _currentInterval == ChartInterval.oneMonth
   }
 
   /// Determine if predicted or real data should be visible

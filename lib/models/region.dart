@@ -2,16 +2,10 @@ import 'output.dart';
 
 class Region {
   final String region;
-  final double lat;
-  final double long;
-  final bool predicted;
   final List<Output> outputs;
 
   Region({
     this.region,
-    this.lat,
-    this.long,
-    this.predicted,
     this.outputs,
   });
 
@@ -23,9 +17,6 @@ class Region {
 
     return Region(
       region: json['region'],
-      lat: double.parse(json['lat']),
-      long: double.parse(json['long']),
-      predicted: json['predicted'],
       outputs: outputs,
     );
   }
