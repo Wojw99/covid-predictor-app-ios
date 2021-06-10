@@ -1,10 +1,8 @@
 import 'package:covid_prediction_app_ios/services/api_service.dart';
 import 'package:covid_prediction_app_ios/services/app_prefs.dart';
 import 'package:covid_prediction_app_ios/view/pages/main_page.dart';
-import 'package:covid_prediction_app_ios/viewmodels/main_vm.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class LoadingViewModel extends ChangeNotifier {
   bool _loading = false;
@@ -19,15 +17,17 @@ class LoadingViewModel extends ChangeNotifier {
   String _errorText = '';
   String get errorText => _errorText;
 
-  // fetch API data (if not fetching yet) and fill in Singleton lists
-  void fetchApiData() async {
+  /// Fetch API data (if not fetching yet) and fill in Singleton lists.
+  /// Path parameters is used only for unit testing.
+  Future<void> fetchApiData({path = '10.0.2.2:3000'}) async {
     if (loading) return;
 
     final apiService = ApiService();
     _loading = true;
 
-    AppPreferences.predictionList = await apiService.getPredictionsList();
-    AppPreferences.realList = await apiService.getPredictionsList();
+    AppPreferences.predictionList =
+        await apiService.getPredictionsList(path: path);
+    AppPreferences.realList = await apiService.getRealList(path: path);
     _success = true;
 
     // try {

@@ -17,8 +17,28 @@ class ApiService {
   }
 
   /// Fetch data from API and return list of Region model
-  Future<List<Region>> getPredictionsList() async {
-    final uri = Uri.http('10.0.2.2:3000', '/api/predictions');
+  Future<List<Region>> getPredictionsList({path = '10.0.2.2:3000'}) async {
+    final uri = Uri.http(path, '/api/predictions');
+    final response = await http.get(uri);
+    final regionList = <Region>[];
+
+    if (response.statusCode == 200) {
+      final json = jsonDecode(response.body);
+
+      for (var regJson in json) {
+        var region = Region.fromJson(regJson);
+        regionList.add(region);
+      }
+
+      return regionList;
+    } else {
+      throw Exception('Unable to perform request!');
+    }
+  }
+
+  /// Fetch data from API and return list of Region model
+  Future<List<Region>> getRealList({path = '10.0.2.2:3000'}) async {
+    final uri = Uri.http(path, '/api/reals');
     final response = await http.get(uri);
     final regionList = <Region>[];
 

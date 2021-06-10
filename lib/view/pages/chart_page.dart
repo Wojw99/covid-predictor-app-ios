@@ -2,7 +2,6 @@ import 'package:covid_prediction_app_ios/utils/constants.dart';
 import 'package:covid_prediction_app_ios/utils/strings.dart';
 import 'package:covid_prediction_app_ios/view/widgets/ios_back_button.dart';
 import 'package:covid_prediction_app_ios/view/widgets/ios_button.dart';
-import 'package:covid_prediction_app_ios/view/widgets/ios_textfield.dart';
 import 'package:covid_prediction_app_ios/view/widgets/w_chart.dart';
 import 'package:covid_prediction_app_ios/viewmodels/app_theme.dart';
 import 'package:covid_prediction_app_ios/viewmodels/chart_vm.dart';

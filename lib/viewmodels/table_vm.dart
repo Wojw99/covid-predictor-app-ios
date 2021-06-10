@@ -12,7 +12,7 @@ class TableViewModel extends ChangeNotifier {
   DateTime get lastDate => _predictionList.first.outputs.last.date;
 
   /// For button with date
-  DateTime _selectedDate = DateTime.utc(2021, 03, 24);
+  DateTime _selectedDate = DateTime.utc(2021, 6, 8);
   DateTime get selectedDate => _selectedDate;
   String get selectedDateString =>
       '${_selectedDate.day}.${_selectedDate.month}.${_selectedDate.year}';
