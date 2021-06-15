@@ -17,7 +17,7 @@ class SelectRegionViewModel extends ChangeNotifier {
 
   void filterRegions(String value) {
     _regionNames = _regionNamesInitial
-        .where((element) => element.contains(value))
+        .where((element) => element.toLowerCase().contains(value.toLowerCase()))
         .toList();
     notifyListeners();
   }

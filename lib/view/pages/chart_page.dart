@@ -1,5 +1,6 @@
 import 'package:covid_prediction_app_ios/utils/constants.dart';
 import 'package:covid_prediction_app_ios/utils/strings.dart';
+import 'package:covid_prediction_app_ios/view/view_helper.dart';
 import 'package:covid_prediction_app_ios/view/widgets/ios_back_button.dart';
 import 'package:covid_prediction_app_ios/view/widgets/ios_button.dart';
 import 'package:covid_prediction_app_ios/view/widgets/w_chart.dart';
@@ -83,7 +84,9 @@ class _ChartPageState extends State<ChartPage> {
                             Column(
                               children: [
                                 Text(
-                                  _viewModel.getCurrentPredicted(),
+                                  ViewHelper.formatNumber(
+                                    _viewModel.getCurrentPredicted(),
+                                  ),
                                   style: _appTheme.textChartValue,
                                 ),
                                 Text(
@@ -104,7 +107,9 @@ class _ChartPageState extends State<ChartPage> {
                             Column(
                               children: [
                                 Text(
-                                  _viewModel.getCurrentReal(),
+                                  ViewHelper.formatNumber(
+                                    _viewModel.getCurrentReal(),
+                                  ),
                                   style: _appTheme.textChartValue,
                                 ),
                                 Text(

@@ -1,5 +1,6 @@
 import 'package:covid_prediction_app_ios/utils/constants.dart';
 import 'package:covid_prediction_app_ios/utils/strings.dart';
+import 'package:covid_prediction_app_ios/view/view_helper.dart';
 import 'package:covid_prediction_app_ios/view/widgets/ios_back_button.dart';
 import 'package:covid_prediction_app_ios/view/widgets/ios_button.dart';
 import 'package:covid_prediction_app_ios/viewmodels/app_theme.dart';
@@ -136,7 +137,9 @@ class _TablePageState extends State<TablePage> {
                                     ),
                                     Expanded(
                                       child: Text(
-                                        _viewModel.getPredictedCasesAt(index),
+                                        ViewHelper.formatNumber(
+                                          _viewModel.getPredictedCasesAt(index),
+                                        ),
                                         style: _appTheme.textDark.copyWith(
                                             color: _appTheme.colors.accent),
                                       ),
@@ -144,7 +147,9 @@ class _TablePageState extends State<TablePage> {
                                     ),
                                     Expanded(
                                       child: Text(
-                                        _viewModel.getRealCasesAt(index),
+                                        ViewHelper.formatNumber(
+                                          _viewModel.getRealCasesAt(index),
+                                        ),
                                         style: _appTheme.textDark,
                                       ),
                                       flex: 12,

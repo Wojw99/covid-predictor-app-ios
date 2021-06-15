@@ -1,5 +1,6 @@
 import 'package:covid_prediction_app_ios/utils/constants.dart';
 import 'package:covid_prediction_app_ios/utils/strings.dart';
+import 'package:covid_prediction_app_ios/view/view_helper.dart';
 import 'package:covid_prediction_app_ios/view/widgets/ios_button.dart';
 import 'package:covid_prediction_app_ios/viewmodels/app_theme.dart';
 import 'package:covid_prediction_app_ios/viewmodels/main_vm.dart';
@@ -86,6 +87,7 @@ class _MainPageState extends State<MainPage> {
                       },
                       text: Strings.table,
                       iconData: Icons.table_rows_rounded,
+                      backgroundColor: _appTheme.colors.accent,
                     ),
                     IosButton(
                       onPressed: () {
@@ -93,6 +95,7 @@ class _MainPageState extends State<MainPage> {
                       },
                       text: Strings.chart,
                       iconData: Icons.bar_chart,
+                      backgroundColor: _appTheme.colors.accent,
                     ),
                     IosButton(
                       onPressed: () {
@@ -100,6 +103,7 @@ class _MainPageState extends State<MainPage> {
                       },
                       text: Strings.worldMap,
                       iconData: Icons.map,
+                      backgroundColor: _appTheme.colors.accent,
                     ),
                   ],
                 ),
@@ -129,9 +133,11 @@ class _MainPageState extends State<MainPage> {
                               Padding(
                                 padding: EdgeInsets.symmetric(vertical: 5.0),
                                 child: Text(
-                                  _viewModel
-                                      .getPredictedCasesToday()
-                                      .toString(),
+                                  ViewHelper.formatNumber(
+                                    _viewModel
+                                        .getPredictedCasesToday()
+                                        .toString(),
+                                  ),
                                   style: _appTheme.casesStyle,
                                 ),
                               ),
@@ -152,7 +158,9 @@ class _MainPageState extends State<MainPage> {
                               Padding(
                                 padding: EdgeInsets.symmetric(vertical: 5.0),
                                 child: Text(
-                                  _viewModel.getRealCasesToday().toString(),
+                                  ViewHelper.formatNumber(
+                                    _viewModel.getRealCasesToday().toString(),
+                                  ),
                                   style: _appTheme.casesStyle,
                                 ),
                               ),

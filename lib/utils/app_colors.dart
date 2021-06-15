@@ -32,7 +32,7 @@ class AppColors {
   static ThemeColors _darkThemeColors = ThemeColors(
     light: Color(0xff292929),
     gray: Color(0xff0D0D0D),
-    accent: Color(0xff0A64EC),
+    accent: Color(0xffec860a),
     accentLight: Color(0xff575757),
     accentRed: Color(0xffed3c43),
     textLight: Color(0xb3ffffff),

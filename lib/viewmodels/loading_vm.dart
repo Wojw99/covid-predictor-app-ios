@@ -19,7 +19,8 @@ class LoadingViewModel extends ChangeNotifier {
 
   /// Fetch API data (if not fetching yet) and fill in Singleton lists.
   /// Path parameters is used only for unit testing.
-  Future<void> fetchApiData({path = '10.0.2.2:3000'}) async {
+  /// 192.168.1.20:3000, 10.0.2.2:3000
+  Future<void> fetchApiData({path = '192.168.1.20:3000'}) async {
     if (loading) return;
 
     final apiService = ApiService();

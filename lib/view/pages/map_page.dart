@@ -132,28 +132,6 @@ class _MapPageState extends State<MapPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              /// * * * * * BUTTON DATE * * * * *
-              // Padding(
-              //   padding: EdgeInsets.fromLTRB(
-              //     Constants.screenPadding,
-              //     0,
-              //     Constants.screenPadding,
-              //     Constants.screenPadding / 2,
-              //   ),
-              //   child: IosButton(
-              //     onPressed: () {
-              //       showDatePicker(
-              //         context: context,
-              //         initialDate: _viewModel.selectedDate,
-              //         firstDate: _viewModel.getFirstDate(),
-              //         lastDate: _viewModel.getLastDate(),
-              //       ).then((value) => _viewModel.changeDate(value));
-              //     },
-              //     text: _viewModel.selectedDateString,
-              //     iconData: Icons.calendar_today,
-              //   ),
-              // ),
-
               /// * * * * * WORLD MAP * * * * *
               Expanded(
                 child: Container(
@@ -243,51 +221,6 @@ class _MapPageState extends State<MapPage> {
                   ),
                 ),
               ),
-
-              /// * * * * * SETTINGS * * * * *
-              // Visibility(
-              //   visible:
-              //       MediaQuery.of(context).orientation == Orientation.portrait,
-              //   child: Container(
-              //     color: _appTheme.colors.light,
-              //     child: Padding(
-              //       padding: EdgeInsets.symmetric(
-              //         horizontal: Constants.screenPadding,
-              //         vertical: Constants.screenPadding / 3,
-              //       ),
-              //       child: Row(
-              //         children: [
-              //           /// * * * PREDICTED * * *
-              //           Expanded(
-              //             child: IosButton(
-              //               onPressed: () {
-              //                 _viewModel.changePredicted(true);
-              //               },
-              //               disabled: _viewModel.showPredicted ? false : true,
-              //               disabledColor: _appTheme.colors.gray,
-              //               text: Strings.predicted,
-              //             ),
-              //           ),
-              //           SizedBox(
-              //             width: 10.0,
-              //           ),
-              //
-              //           /// * * * REAL * * *
-              //           Expanded(
-              //             child: IosButton(
-              //               onPressed: () {
-              //                 _viewModel.changePredicted(false);
-              //               },
-              //               disabled: _viewModel.showPredicted ? true : false,
-              //               disabledColor: _appTheme.colors.gray,
-              //               text: Strings.real,
-              //             ),
-              //           ),
-              //         ],
-              //       ),
-              //     ),
-              //   ),
-              // ),
             ],
           ),
         ),

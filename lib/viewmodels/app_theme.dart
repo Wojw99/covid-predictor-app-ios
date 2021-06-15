@@ -17,7 +17,7 @@ class AppTheme extends ChangeNotifier {
   ThemeColors darkThemeColors = ThemeColors(
     light: Color(0xff292929),
     gray: Color(0xff1E1E1E),
-    accent: Color(0xff0A64EC),
+    accent: Color(0xffd2720c),
     accentLight: Color(0xff494949),
     accentRed: Color(0xffed3c43),
     textLight: Color(0xb3ffffff),
@@ -74,13 +74,13 @@ class AppTheme extends ChangeNotifier {
       );
 
   TextStyle get textLight => TextStyle(
-        fontSize: 17.0,
+        fontSize: 16.0,
         fontWeight: FontWeight.normal,
         color: colors.textLight,
       );
 
   TextStyle get textDark => TextStyle(
-        fontSize: 18.0,
+        fontSize: 16.0,
         fontWeight: FontWeight.normal,
         color: colors.textDark,
       );
@@ -92,7 +92,7 @@ class AppTheme extends ChangeNotifier {
       );
 
   TextStyle get textChartValue => TextStyle(
-        fontSize: 28.0,
+        fontSize: 23.0,
         fontWeight: FontWeight.w600,
         color: colors.textDark,
       );
