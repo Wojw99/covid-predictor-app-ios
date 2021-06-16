@@ -41,7 +41,10 @@ class _ChartPageState extends State<ChartPage> {
         centerTitle: true,
         elevation: 0.0,
         backgroundColor: _appTheme.colors.gray,
-        leading: IosBackButton(onPressed: () => Navigator.of(context).pop()),
+        leading: IosBackButton(
+          onPressed: () => Navigator.of(context).pop(),
+          iconColor: _appTheme.colors.accent,
+        ),
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -63,6 +66,7 @@ class _ChartPageState extends State<ChartPage> {
                     _viewModel.navigateToSelectRegionPage(context);
                   },
                   text: _viewModel.currentRegion,
+                  backgroundColor: _appTheme.colors.accent,
                 ),
 
                 SizedBox(height: Constants.screenPadding),
@@ -162,6 +166,8 @@ class _ChartPageState extends State<ChartPage> {
                                           disabledColor: _appTheme.colors.gray,
                                           text: _viewModel
                                               .formatChartInterval(interval),
+                                          backgroundColor:
+                                              _appTheme.colors.accent,
                                         ),
                                       ),
                                     ),
@@ -184,6 +190,7 @@ class _ChartPageState extends State<ChartPage> {
                                 disabled: !_viewModel.showPredicted,
                                 disabledColor: _appTheme.colors.gray,
                                 text: Strings.predicted,
+                                backgroundColor: _appTheme.colors.accent,
                               ),
                             ),
                             SizedBox(
@@ -199,6 +206,7 @@ class _ChartPageState extends State<ChartPage> {
                                 disabled: _viewModel.showPredicted,
                                 disabledColor: _appTheme.colors.gray,
                                 text: Strings.real,
+                                backgroundColor: _appTheme.colors.accent,
                               ),
                             ),
                           ],

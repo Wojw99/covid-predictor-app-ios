@@ -30,7 +30,10 @@ class _LandscapeViewState extends State<LandscapeView> {
     return Row(
       children: [
         /// * * * * * BACK BUTTON * * * * *
-        IosBackButton(onPressed: () => Navigator.of(context).pop()),
+        IosBackButton(
+          onPressed: () => Navigator.of(context).pop(),
+          iconColor: _appTheme.colors.accent,
+        ),
 
         /// * * * * * BUTTON DATE * * * * *
         Expanded(
@@ -45,6 +48,7 @@ class _LandscapeViewState extends State<LandscapeView> {
             },
             text: _viewModel.selectedDateString,
             iconData: Icons.calendar_today,
+            backgroundColor: _appTheme.colors.accent,
           ),
         ),
       ],
@@ -77,7 +81,10 @@ class _PortraitViewState extends State<PortraitView> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           /// * * * * * BACK BUTTON * * * * *
-          IosBackButton(onPressed: () => Navigator.of(context).pop()),
+          IosBackButton(
+            onPressed: () => Navigator.of(context).pop(),
+            iconColor: _appTheme.colors.accent,
+          ),
 
           /// * * * * * BUTTON DATE * * * * *
           IosButton(
@@ -91,6 +98,7 @@ class _PortraitViewState extends State<PortraitView> {
             },
             text: _viewModel.selectedDateString,
             iconData: Icons.calendar_today,
+            backgroundColor: _appTheme.colors.accent,
           ),
         ],
       ),
@@ -194,6 +202,7 @@ class _MapPageState extends State<MapPage> {
                                         _viewModel.showPredicted ? false : true,
                                     disabledColor: _appTheme.colors.gray,
                                     text: Strings.predicted,
+                                    backgroundColor: _appTheme.colors.accent,
                                   ),
                                 ),
                                 SizedBox(
@@ -210,6 +219,7 @@ class _MapPageState extends State<MapPage> {
                                         _viewModel.showPredicted ? true : false,
                                     disabledColor: _appTheme.colors.gray,
                                     text: Strings.real,
+                                    backgroundColor: _appTheme.colors.accent,
                                   ),
                                 ),
                               ],

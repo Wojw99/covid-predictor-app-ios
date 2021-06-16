@@ -17,7 +17,7 @@ class AppTheme extends ChangeNotifier {
   ThemeColors darkThemeColors = ThemeColors(
     light: Color(0xff292929),
     gray: Color(0xff1E1E1E),
-    accent: Color(0xffd2720c),
+    accent: Color(0xffec7f0a),
     accentLight: Color(0xff494949),
     accentRed: Color(0xffed3c43),
     textLight: Color(0xb3ffffff),

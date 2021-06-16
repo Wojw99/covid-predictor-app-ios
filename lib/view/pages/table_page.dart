@@ -40,7 +40,10 @@ class _TablePageState extends State<TablePage> {
           ),
         ),
         centerTitle: true,
-        leading: IosBackButton(onPressed: () => Navigator.of(context).pop()),
+        leading: IosBackButton(
+          onPressed: () => Navigator.of(context).pop(),
+          iconColor: _appTheme.colors.accent,
+        ),
       ),
 
       /// * * * * * BODY * * * * *
@@ -63,6 +66,7 @@ class _TablePageState extends State<TablePage> {
                 },
                 text: _viewModel.selectedDateString,
                 iconData: Icons.calendar_today,
+                backgroundColor: _appTheme.colors.accent,
               ),
 
               SizedBox(height: Constants.screenPadding),
