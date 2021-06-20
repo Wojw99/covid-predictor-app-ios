@@ -1,3 +1,4 @@
+//import 'package:covid_prediction_app_ios/services/app_prefs.dart';
 import 'package:covid_prediction_app_ios/services/storage_manager.dart';
 import 'file:///D:/Dev/GitHub/covid-predictor-app-ios/lib/services/app_prefs.dart';
 import 'package:flutter/cupertino.dart';

@@ -8,6 +8,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'info_page.dart';
+
 class MainPage extends StatefulWidget {
   @override
   _MainPageState createState() => _MainPageState();
@@ -35,6 +37,22 @@ class _MainPageState extends State<MainPage> {
             icon: Icon(Icons.visibility),
             color: _appTheme.colors.accent,
             onPressed: _appTheme.toggleDarkMode,
+          ),
+
+          IconButton(
+            icon: Icon(Icons.info),
+            color: _appTheme.colors.accent,
+            //color: Colors.blueAccent,
+            //onPressed: _appTheme.toggleDarkMode,
+
+            onPressed: (){
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => InfoPage()),
+              );
+            },
+
+
           ),
         ],
       ),

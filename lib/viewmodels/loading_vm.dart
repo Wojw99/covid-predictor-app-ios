@@ -26,6 +26,7 @@ class LoadingViewModel extends ChangeNotifier {
     final apiService = ApiService();
     _loading = true;
 
+//<<<<<<< Updated upstream
     // AppPreferences.predictionList =
     //     await apiService.getPredictionsList(path: path);
     // AppPreferences.realList = await apiService.getRealList(path: path);
@@ -43,6 +44,25 @@ class LoadingViewModel extends ChangeNotifier {
       _errorText = e.toString();
       print(e);
     }
+//=======
+    AppPreferences.predictionList =
+        await apiService.getPredictionsList();
+    AppPreferences.realList = await apiService.getRealList();
+    _success = true;
+
+    // try {
+    //   print('loading data...');
+    //   // Fill in singleton lists available for the whole application
+    //   AppPreferences.predictionList = await apiService.getPredictionsList();
+    //   AppPreferences.realList = await apiService.getPredictionsList();
+    //   _success = true;
+    //   print('success!');
+    // } catch (e) {
+    //   _error = true;
+    //   _errorText = e.toString();
+    //   print(e);
+    // }
+//>>>>>>> Stashed changes
 
     notifyListeners();
   }
