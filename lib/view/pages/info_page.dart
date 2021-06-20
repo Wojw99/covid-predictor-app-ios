@@ -138,7 +138,7 @@ class _InfoPageState extends State<InfoPage> {
               textAlign: TextAlign.center,
               style: TextStyle(
                 //color: new Color(0xFF0D47A1),
-                color: _appTheme.colors.accent,
+                color: _appTheme.colors.accentRed,
                 fontWeight: FontWeight.bold,
                 fontSize: 20.0,
                 //backgroundColor: new Color(0xFFFF7043)
