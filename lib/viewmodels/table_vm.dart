@@ -22,6 +22,30 @@ class TableViewModel extends ChangeNotifier {
   TotalCases _selectedCases = TotalCases.Infected;
   TotalCases get selectedCases => _selectedCases;
 
+  /// Available intervals
+  List<TotalCases> get availableRadioButtons => _availableRadioButtons;
+  List<TotalCases> _availableRadioButtons = [
+    TotalCases.Infected,
+    TotalCases.Recovered,
+    TotalCases.Deaths,
+  ];
+
+  String formatChartInterval(TotalCases cases) {
+    if (cases == TotalCases.Infected)
+      return 'Infected';
+    else if (cases == TotalCases.Recovered)
+      return 'Recovered';
+    else // if(cases == TotalCases.Deaths)
+      return 'Deaths';
+  }
+
+  void changeTotalCases(TotalCases cases) {
+    if (cases != null) {
+      _selectedCases = cases;
+      notifyListeners();
+    }
+  }
+
   void changeDate(DateTime date) {
     if (date != null) {
       _selectedDate = date.toUtc();

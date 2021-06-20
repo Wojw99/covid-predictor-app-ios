@@ -29,197 +29,198 @@ class _ChartPageState extends State<ChartPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      /// * * * * * APP BAR * * * * *
-      appBar: AppBar(
-        title: Text(
-          Strings.chart,
-          style: TextStyle(
-            color: _appTheme.colors.textDark,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        centerTitle: true,
-        elevation: 0.0,
-        backgroundColor: _appTheme.colors.gray,
-        leading: IosBackButton(
-          onPressed: () => Navigator.of(context).pop(),
-          iconColor: _appTheme.colors.accent,
-        ),
-      ),
-      body: SingleChildScrollView(
+      backgroundColor: _appTheme.colors.gray,
+      body: SafeArea(
         child: Container(
-          color: _appTheme.colors.gray,
           child: Padding(
             padding: EdgeInsets.fromLTRB(
               Constants.screenPadding,
-              0,
+              8.0,
               Constants.screenPadding,
-              Constants.screenPadding,
+              Constants.screenPadding / 3,
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                /// * * * * * BUTTON REGION * * * * *
-                IosButton(
-                  iconData: Icons.search,
-                  onPressed: () {
-                    _viewModel.navigateToSelectRegionPage(context);
-                  },
-                  text: _viewModel.currentRegion,
-                  backgroundColor: _appTheme.colors.accent,
-                ),
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  /// * * * * * TOP BAR * * * * *
+                  buildTopBar(),
 
-                SizedBox(height: Constants.screenPadding),
+                  SizedBox(height: Constants.screenPadding),
 
-                Container(
-                  decoration: _appTheme.defaultBoxDecoration,
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: Constants.screenPadding,
-                      vertical: 10.0,
-                    ),
-                    child: Column(
-                      children: [
-                        /// * * * * * VALUE DESCRIPTION * * * * *
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            /// * * * PREDICTED * * *
-                            Column(
-                              children: [
-                                Text(
-                                  ViewHelper.formatNumber(
-                                    _viewModel.getCurrentPredicted(),
-                                  ),
-                                  style: _appTheme.textChartValue,
-                                ),
-                                Text(
-                                  Strings.predicted,
-                                  style: _appTheme.textLight
-                                      .copyWith(fontSize: 12.0),
-                                ),
-                              ],
-                            ),
-
-                            /// * * * DATE * * *
-                            Text(
-                              _viewModel.getCurrentOutputDate(),
-                              style: _appTheme.textChartData,
-                            ),
-
-                            /// * * * REAL * * *
-                            Column(
-                              children: [
-                                Text(
-                                  ViewHelper.formatNumber(
-                                    _viewModel.getCurrentReal(),
-                                  ),
-                                  style: _appTheme.textChartValue,
-                                ),
-                                Text(
-                                  Strings.real,
-                                  style: _appTheme.textLight
-                                      .copyWith(fontSize: 12.0),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-
-                        /// * * * * * CHART * * * * *
-                        WChart(
-                          width: MediaQuery.of(context).size.width -
-                              Constants.screenPadding * 4,
-                          height: MediaQuery.of(context).size.height / 2,
-                          values: _viewModel.getOutputCases(),
-                          onPressed: _viewModel.changeIndex,
-                          barColor: _appTheme.colors.accentLight,
-                          selectedBarColor: _appTheme.colors.accent,
-                          backgroundColor: _appTheme.colors.light,
-                        ),
-
-                        SizedBox(
-                          height: Constants.screenPadding,
-                        ),
-
-                        /// * * * * * CHART SETTINGS * * * * *
-                        Container(
-                          decoration: _appTheme.defaultBoxDecoration.copyWith(
-                            color: _appTheme.colors.gray,
-                          ),
-                          child: Row(
-                              children: _viewModel.availableIntervals
-                                  .map(
-                                    (interval) => Expanded(
-                                      child: Padding(
-                                        padding: EdgeInsets.only(right: 5.0),
-                                        child: IosButton(
-                                          onPressed: () {
-                                            _viewModel.changeInterval(interval);
-                                          },
-                                          disabled:
-                                              _viewModel.currentInterval !=
-                                                  interval,
-                                          disabledColor: _appTheme.colors.gray,
-                                          text: _viewModel
-                                              .formatChartInterval(interval),
-                                          backgroundColor:
-                                              _appTheme.colors.accent,
-                                        ),
-                                      ),
-                                    ),
-                                  )
-                                  .toList()),
-                        ),
-
-                        SizedBox(
-                          height: Constants.screenPadding / 2,
-                        ),
-
-                        Row(
-                          children: [
-                            /// * * * PREDICTED * * *
-                            Expanded(
-                              child: IosButton(
-                                onPressed: () {
-                                  _viewModel.changePredicted(true);
-                                },
-                                disabled: !_viewModel.showPredicted,
-                                disabledColor: _appTheme.colors.gray,
-                                text: Strings.predicted,
-                                backgroundColor: _appTheme.colors.accent,
-                              ),
-                            ),
-                            SizedBox(
-                              width: 10.0,
-                            ),
-
-                            /// * * * REAL * * *
-                            Expanded(
-                              child: IosButton(
-                                onPressed: () {
-                                  _viewModel.changePredicted(false);
-                                },
-                                disabled: _viewModel.showPredicted,
-                                disabledColor: _appTheme.colors.gray,
-                                text: Strings.real,
-                                backgroundColor: _appTheme.colors.accent,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
+                  /// * * * * * CHART SPACE * * * * *
+                  Container(
+                    decoration: _appTheme.defaultBoxDecoration,
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: Constants.screenPadding,
+                        vertical: 10.0,
+                      ),
+                      child: buildChartSpace(),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
       ),
+    );
+  }
+
+  Widget buildChartSpace() {
+    return Column(
+      children: [
+        /// * * * * * VALUE DESCRIPTION * * * * *
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            /// * * * PREDICTED * * *
+            Column(
+              children: [
+                Text(
+                  ViewHelper.formatNumber(
+                    _viewModel.getCurrentPredicted(),
+                  ),
+                  style: _appTheme.textChartValue,
+                ),
+                Text(
+                  Strings.predicted,
+                  style: _appTheme.textLight.copyWith(fontSize: 12.0),
+                ),
+              ],
+            ),
+
+            /// * * * DATE * * *
+            Text(
+              _viewModel.getCurrentOutputDate(),
+              style: _appTheme.textChartData,
+            ),
+
+            /// * * * REAL * * *
+            Column(
+              children: [
+                Text(
+                  ViewHelper.formatNumber(
+                    _viewModel.getCurrentReal(),
+                  ),
+                  style: _appTheme.textChartValue,
+                ),
+                Text(
+                  Strings.real,
+                  style: _appTheme.textLight.copyWith(fontSize: 12.0),
+                ),
+              ],
+            ),
+          ],
+        ),
+        SizedBox(
+          height: 10,
+        ),
+
+        /// * * * * * CHART * * * * *
+        WChart(
+          width:
+              MediaQuery.of(context).size.width - Constants.screenPadding * 4,
+          height: MediaQuery.of(context).size.height / 1.7,
+          values: _viewModel.getOutputCases(),
+          onPressed: _viewModel.changeIndex,
+          barColor: _appTheme.colors.accentLight,
+          selectedBarColor: _appTheme.colors.accent,
+          backgroundColor: _appTheme.colors.light,
+        ),
+
+        SizedBox(
+          height: Constants.screenPadding,
+        ),
+
+        /// * * * * * CHART SETTINGS * * * * *
+        Container(
+          decoration: _appTheme.defaultBoxDecoration.copyWith(
+            color: _appTheme.colors.gray,
+          ),
+          child: Row(
+              children: _viewModel.availableIntervals
+                  .map(
+                    (interval) => Expanded(
+                      child: Padding(
+                        padding: EdgeInsets.only(right: 5.0),
+                        child: IosButton(
+                          onPressed: () {
+                            _viewModel.changeInterval(interval);
+                          },
+                          disabled: _viewModel.currentInterval != interval,
+                          disabledColor: _appTheme.colors.gray,
+                          text: _viewModel.formatChartInterval(interval),
+                          backgroundColor: _appTheme.colors.accent,
+                        ),
+                      ),
+                    ),
+                  )
+                  .toList()),
+        ),
+
+        SizedBox(
+          height: Constants.screenPadding / 2,
+        ),
+
+        Row(
+          children: [
+            /// * * * PREDICTED * * *
+            Expanded(
+              child: IosButton(
+                onPressed: () {
+                  _viewModel.changePredicted(true);
+                },
+                disabled: !_viewModel.showPredicted,
+                disabledColor: _appTheme.colors.gray,
+                text: Strings.predicted,
+                backgroundColor: _appTheme.colors.accent,
+              ),
+            ),
+            SizedBox(
+              width: 10.0,
+            ),
+
+            /// * * * REAL * * *
+            Expanded(
+              child: IosButton(
+                onPressed: () {
+                  _viewModel.changePredicted(false);
+                },
+                disabled: _viewModel.showPredicted,
+                disabledColor: _appTheme.colors.gray,
+                text: Strings.real,
+                backgroundColor: _appTheme.colors.accent,
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget buildTopBar() {
+    return Row(
+      children: [
+        /// * * * * * BACK BUTTON * * * * *
+        IosBackButton(
+          onPressed: () => Navigator.of(context).pop(),
+          iconColor: _appTheme.colors.accent,
+        ),
+
+        /// * * * * * BUTTON REGION * * * * *
+        Expanded(
+          child: IosButton(
+            iconData: Icons.search,
+            onPressed: () {
+              _viewModel.navigateToSelectRegionPage(context);
+            },
+            text: _viewModel.currentRegion,
+            backgroundColor: _appTheme.colors.accent,
+          ),
+        ),
+      ],
     );
   }
 }

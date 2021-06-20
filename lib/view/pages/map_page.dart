@@ -182,7 +182,7 @@ class _MapPageState extends State<MapPage> {
                       Padding(
                         padding: EdgeInsets.fromLTRB(
                           Constants.screenPadding / 2,
-                          Constants.screenPadding / 3,
+                          8.0,
                           Constants.screenPadding / 2,
                           Constants.screenPadding / 3,
                         ),

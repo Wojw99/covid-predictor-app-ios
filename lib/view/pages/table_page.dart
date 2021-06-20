@@ -28,14 +28,15 @@ class _TablePageState extends State<TablePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: _appTheme.colors.gray,
+
       /// * * * * * BODY * * * * *
       body: SafeArea(
         child: Container(
-          color: _appTheme.colors.gray,
           child: Padding(
             padding: EdgeInsets.fromLTRB(
               Constants.screenPadding,
-              Constants.screenPadding / 3,
+              8.0,
               Constants.screenPadding,
               Constants.screenPadding / 3,
             ),
@@ -45,9 +46,30 @@ class _TablePageState extends State<TablePage> {
                 /// * * * * * TOP BAR * * * * *
                 buildTopBar(),
 
-                SizedBox(height: Constants.screenPadding),
+                SizedBox(height: Constants.screenPadding / 2),
 
                 /// * * * * * RADIO BUTTONS * * * * *
+                Row(
+                    children: _viewModel.availableRadioButtons
+                        .map(
+                          (cases) => Expanded(
+                            child: Padding(
+                              padding: EdgeInsets.only(right: 5.0),
+                              child: IosButton(
+                                onPressed: () {
+                                  _viewModel.changeTotalCases(cases);
+                                },
+                                disabled: _viewModel.selectedCases != cases,
+                                disabledColor: _appTheme.colors.gray,
+                                text: _viewModel.formatChartInterval(cases),
+                                backgroundColor: _appTheme.colors.accent,
+                              ),
+                            ),
+                          ),
+                        )
+                        .toList()),
+
+                SizedBox(height: Constants.screenPadding / 2),
 
                 /// * * * * * TABLE DESCRIPTION * * * * *
                 Container(
