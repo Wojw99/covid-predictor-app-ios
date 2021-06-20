@@ -1,6 +1,7 @@
 import 'package:covid_prediction_app_ios/services/app_prefs.dart';
 import 'package:covid_prediction_app_ios/utils/app_colors.dart';
 import 'package:covid_prediction_app_ios/view/pages/chart_page.dart';
+import 'package:covid_prediction_app_ios/view/pages/info_page.dart';
 import 'package:covid_prediction_app_ios/view/pages/map_page.dart';
 import 'package:covid_prediction_app_ios/view/pages/table_page.dart';
 import 'package:covid_prediction_app_ios/viewmodels/chart_vm.dart';
@@ -61,6 +62,28 @@ class MainViewModel extends ChangeNotifier {
     );
   }
 
+//<<<<<<< Updated upstream
+//=======
+  void navigateToInfoPage(BuildContext context){
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => MultiProvider(
+          providers: [
+            ChangeNotifierProvider(create: (_) => AppTheme()),
+          ],
+          child: InfoPage(),
+        ),
+      ),
+    );
+
+  }
+
+
+
+
+
+//>>>>>>> Stashed changes
   int getPredictedCasesToday() {
     final poland = AppPreferences.predictionList
         .where((element) => element.region == defaultRegion)
