@@ -34,7 +34,7 @@ class _InfoPageState extends State<InfoPage> {
         title: Text(
           Strings.covidInfo,
           style: TextStyle(
-            color: Colors.black, //_appTheme.colors.textDark,
+            color: _appTheme.colors.textDark, //_appTheme.colors.textDark,
             fontWeight: FontWeight.bold,
             fontSize: 20,
           ),
@@ -45,13 +45,13 @@ class _InfoPageState extends State<InfoPage> {
         leading: IosBackButton(
           onPressed: () => Navigator.of(context).pop(),
           //iconColor: _appTheme.colors.accent,
-          iconColor: Colors.blueAccent,
+          iconColor: _appTheme.colors.accent,
         ),
       ),
 
       /// * * * * * BODY * * * * *
       body: Container(
-        color: Color(0xfff4f4f4), //_appTheme.colors.gray,
+        color: _appTheme.colors.gray, //_appTheme.colors.gray,
         alignment: Alignment.center,
         child: Padding(
           padding: EdgeInsets.fromLTRB(
@@ -66,7 +66,7 @@ class _InfoPageState extends State<InfoPage> {
               "Basic rules against coronavirus:",
               textAlign: TextAlign.center,
               style: TextStyle(
-                color: new Color(0xFF0D47A1),
+                color: _appTheme.colors.accentRed,
                 fontWeight: FontWeight.bold,
                 fontSize: 20.0,
                 //backgroundColor: new Color(0xFFFF7043)
@@ -79,7 +79,7 @@ class _InfoPageState extends State<InfoPage> {
               children: <Widget>[
                 Container(
                   height: 50,
-                  color: Colors.lightGreen,
+                  color: _appTheme.colors.accent,
                   child: const Center(
                     child: Text(
                       'Wash your hands thoroughly and regularly',
@@ -94,7 +94,7 @@ class _InfoPageState extends State<InfoPage> {
                 ),
                 Container(
                   height: 50,
-                  color: Colors.lightGreen,
+                  color: _appTheme.colors.accent,
                   child: const Center(
                       child: Text(
                     'Stay 1.5 metres away from other people',
@@ -108,7 +108,8 @@ class _InfoPageState extends State<InfoPage> {
                 ),
                 Container(
                   height: 50,
-                  color: Colors.lightGreen,
+                  //color: Color(0xff494949),
+                  color: _appTheme.colors.accent ,
                   child: const Center(
                       child: Text(
                     'Remember to wear a mask',
@@ -136,7 +137,8 @@ class _InfoPageState extends State<InfoPage> {
               Strings.testPositive,
               textAlign: TextAlign.center,
               style: TextStyle(
-                color: new Color(0xFF0D47A1),
+                //color: new Color(0xFF0D47A1),
+                color: _appTheme.colors.accent,
                 fontWeight: FontWeight.bold,
                 fontSize: 20.0,
                 //backgroundColor: new Color(0xFFFF7043)
@@ -144,54 +146,35 @@ class _InfoPageState extends State<InfoPage> {
             ),
             Container(
               padding: const EdgeInsets.all(20.0),
-              child: ElevatedButton.icon(
-                  onPressed: () {
-                    setState(() {
-                      const url =
-                          'https://www.gov.pl/web/koronawirus/wlasnie-otrzymalem-pozytywny-wynik-testu';
-                      launch(url);
-                    });
-                  },
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.blueAccent,
-                    onPrimary: Colors.white,
-                    elevation: 20,
-                    minimumSize: Size(200, 50),
-                  ),
-                  label: Text('COVID TEST POSITIVE',
-                      style: TextStyle(
-                        color: new Color(0xFFFFFFFF),
-                        fontWeight: FontWeight.bold,
-                        fontSize: 15.0,
-                      )),
-                  icon: const Icon(Icons.coronavirus)),
+              child: IosButton(
+                onPressed: () {
+                  setState(() {
+                    const url =
+                        'https://www.gov.pl/web/koronawirus/wlasnie-otrzymalem-pozytywny-wynik-testu';
+                    launch(url);
+                  });
+                },
+                text: "COVID TEST POSITIVE",
+                iconData: Icons.coronavirus,
+                backgroundColor: _appTheme.colors.accent,
+              )
+
             ),
-            Padding(
-              padding: const EdgeInsets.all(5.0),
-              child: ElevatedButton.icon(
-                  onPressed: () {
-                    setState(() {
-                      const url =
-                          'https://www.gov.pl/web/koronawirus/mam-koronawirusa-i-jestem-w-izolacji-domowej';
-                      launch(url);
-                      //Navigator.push(context,new MaterialPageRoute(builder: (context) => IsolHomeFragment()),
-                      // );
-                    });
-                  },
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.blueAccent,
-                    onPrimary: Colors.white,
-                    elevation: 20,
-                    minimumSize: Size(50, 50),
-                  ),
-                  label: Text('HOME ISOLATION PRINCIPLES',
-                      style: TextStyle(
-                        color: new Color(0xFFFFFFFF),
-                        fontWeight: FontWeight.bold,
-                        fontSize: 15.0,
-                      )),
-                  icon: const Icon(Icons.home)),
-            ),
+                Padding(
+                  padding: const EdgeInsets.all(20.0),
+                    child: IosButton(
+                      onPressed: () {
+                        setState(() {
+                          const url =
+                              'https://www.gov.pl/web/koronawirus/mam-koronawirusa-i-jestem-w-izolacji-domowej';
+                          launch(url);
+                        });
+                      },
+                      text: "HOME ISOLATION PRINCIPLES",
+                      iconData: Icons.home,
+                      backgroundColor: _appTheme.colors.accent,
+                    )
+                ),
           ]),
         ),
       ),
