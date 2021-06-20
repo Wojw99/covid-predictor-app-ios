@@ -35,8 +35,8 @@ class LoadingViewModel extends ChangeNotifier {
     try {
       print('loading data...');
       // Fill in singleton lists available for the whole application
-      AppPreferences.predictionList = await apiService.getPredictionsListTest();
-      AppPreferences.realList = await apiService.getRealListTest();
+      AppPreferences.predictionList = await apiService.getPredictionsList();
+      AppPreferences.realList = await apiService.getRealList();
       _success = true;
       print('success!');
     } catch (e) {
@@ -46,8 +46,8 @@ class LoadingViewModel extends ChangeNotifier {
     }
 //=======
     AppPreferences.predictionList =
-        await apiService.getPredictionsListTest();
-    AppPreferences.realList = await apiService.getRealListTest();
+        await apiService.getPredictionsList();
+    AppPreferences.realList = await apiService.getRealList();
     _success = true;
 
     // try {
