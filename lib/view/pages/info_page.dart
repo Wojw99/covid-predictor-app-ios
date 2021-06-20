@@ -25,7 +25,7 @@ class _InfoPageState extends State<InfoPage> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     //_viewModel = Provider.of<TableViewModel>(context);
-    //_appTheme = Provider.of<AppTheme>(context);
+    _appTheme = Provider.of<AppTheme>(context);
   }
 
 
