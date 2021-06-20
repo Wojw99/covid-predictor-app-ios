@@ -1,5 +1,6 @@
 import 'package:covid_prediction_app_ios/models/region.dart';
 import 'package:covid_prediction_app_ios/services/app_prefs.dart';
+import 'package:covid_prediction_app_ios/utils/enums.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -16,6 +17,10 @@ class TableViewModel extends ChangeNotifier {
   DateTime get selectedDate => _selectedDate;
   String get selectedDateString =>
       '${_selectedDate.day}.${_selectedDate.month}.${_selectedDate.year}';
+
+  /// Index of currently visible cases (infections, recovered, deaths)
+  TotalCases _selectedCases = TotalCases.Infected;
+  TotalCases get selectedCases => _selectedCases;
 
   void changeDate(DateTime date) {
     if (date != null) {
@@ -35,8 +40,6 @@ class TableViewModel extends ChangeNotifier {
   }
 
   String getPredictedCasesAt(int index) {
-    // There should be more predicted cases than real cases
-    // but let's check it for sure
     final matchedOutputs = _predictionList[index]
         .outputs
         .where((element) => element.date == _selectedDate)
@@ -44,11 +47,15 @@ class TableViewModel extends ChangeNotifier {
 
     if (matchedOutputs.isEmpty) return '...';
 
-    return matchedOutputs.first.cases.toString();
+    if (selectedCases == TotalCases.Infected)
+      return matchedOutputs.first.infected.toString();
+    else if (selectedCases == TotalCases.Recovered)
+      return matchedOutputs.first.recovered.toString();
+    else // (selectedCases == TotalCases.Deaths)
+      return matchedOutputs.first.deaths.toString();
   }
 
   String getRealCasesAt(int index) {
-    // There may be more real cases than predicted
     final matchedOutputs = _realList[index]
         .outputs
         .where((element) => element.date == _selectedDate)
@@ -56,6 +63,11 @@ class TableViewModel extends ChangeNotifier {
 
     if (matchedOutputs.isEmpty) return '...';
 
-    return matchedOutputs.first.cases.toString();
+    if (selectedCases == TotalCases.Infected)
+      return matchedOutputs.first.infected.toString();
+    else if (selectedCases == TotalCases.Recovered)
+      return matchedOutputs.first.recovered.toString();
+    else // (selectedCases == TotalCases.Deaths)
+      return matchedOutputs.first.deaths.toString();
   }
 }

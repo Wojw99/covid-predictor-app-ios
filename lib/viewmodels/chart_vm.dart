@@ -51,7 +51,7 @@ class ChartViewModel extends ChangeNotifier {
   String getCurrentPredicted() {
     final list = getPredictedOutputs();
     if (list.isNotEmpty && currentIndex < list.length) {
-      return list[currentIndex].cases.toString();
+      return list[currentIndex].infected.toString();
     } else {
       return '...';
     }
@@ -62,7 +62,7 @@ class ChartViewModel extends ChangeNotifier {
     final list = getRealOutputs();
     // There may be more predicted cases than real cases
     if (list.isNotEmpty && currentIndex < list.length) {
-      return list[currentIndex].cases.toString();
+      return list[currentIndex].infected.toString();
     } else {
       return '...';
     }
@@ -130,7 +130,7 @@ class ChartViewModel extends ChangeNotifier {
 
   /// Get list of output cases that will be visible on chart
   List<double> getOutputCases() {
-    final outputs = getOutputs().map((e) => e.cases.toDouble()).toList();
+    final outputs = getOutputs().map((e) => e.infected.toDouble()).toList();
     return outputs;
   }
 

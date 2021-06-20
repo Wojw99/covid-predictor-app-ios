@@ -17,8 +17,8 @@ class ApiService {
   }
 
   /// Fetch data from API and return list of Region model
-  Future<List<Region>> getPredictionsList({path = '10.0.2.2:3000'}) async {
-    final uri = Uri.http(path, '/api/predictions');
+  Future<List<Region>> getPredictionsList({path = 'kwolp.pl'}) async {
+    final uri = Uri.http(path, '/covid/predictions.json');
     final response = await http.get(uri);
     final regionList = <Region>[];
 
@@ -37,8 +37,8 @@ class ApiService {
   }
 
   /// Fetch data from API and return list of Region model
-  Future<List<Region>> getRealList({path = '10.0.2.2:3000'}) async {
-    final uri = Uri.http(path, '/api/reals');
+  Future<List<Region>> getRealList({path = 'kwolp.pl'}) async {
+    final uri = Uri.http(path, '/covid/reals.json');
     final response = await http.get(uri);
     final regionList = <Region>[];
 
@@ -62,31 +62,31 @@ class ApiService {
       Region(
         region: 'Poland',
         outputs: [
-          Output(date: DateTime.utc(2021, 04, 21), cases: 99),
-          Output(date: DateTime.utc(2021, 04, 22), cases: 999),
-          Output(date: DateTime.utc(2021, 04, 23), cases: 9999),
-          Output(date: DateTime.utc(2021, 04, 24), cases: 244),
+          Output(date: DateTime.utc(2021, 04, 21), infected: 99),
+          Output(date: DateTime.utc(2021, 04, 22), infected: 999),
+          Output(date: DateTime.utc(2021, 04, 23), infected: 9999),
+          Output(date: DateTime.utc(2021, 04, 24), infected: 244),
         ],
       ),
       Region(
         region: 'Germany',
         outputs: [
-          Output(date: DateTime.utc(2021, 04, 21), cases: 11245),
-          Output(date: DateTime.utc(2021, 04, 22), cases: 11500),
-          Output(date: DateTime.utc(2021, 04, 23), cases: 11656),
-          Output(date: DateTime.utc(2021, 04, 24), cases: 11567),
-          Output(date: DateTime.utc(2021, 04, 25), cases: 11667),
-          Output(date: DateTime.utc(2021, 04, 26), cases: 11267),
-          Output(date: DateTime.utc(2021, 04, 27), cases: 11467),
+          Output(date: DateTime.utc(2021, 04, 21), infected: 11245),
+          Output(date: DateTime.utc(2021, 04, 22), infected: 11500),
+          Output(date: DateTime.utc(2021, 04, 23), infected: 11656),
+          Output(date: DateTime.utc(2021, 04, 24), infected: 11567),
+          Output(date: DateTime.utc(2021, 04, 25), infected: 11667),
+          Output(date: DateTime.utc(2021, 04, 26), infected: 11267),
+          Output(date: DateTime.utc(2021, 04, 27), infected: 11467),
         ],
       ),
       Region(
         region: 'United Kingdom',
         outputs: [
-          Output(date: DateTime.utc(2021, 04, 21), cases: 1),
-          Output(date: DateTime.utc(2021, 04, 22), cases: 23),
-          Output(date: DateTime.utc(2021, 04, 23), cases: 266),
-          Output(date: DateTime.utc(2021, 04, 24), cases: 3223),
+          Output(date: DateTime.utc(2021, 04, 21), infected: 1),
+          Output(date: DateTime.utc(2021, 04, 22), infected: 23),
+          Output(date: DateTime.utc(2021, 04, 23), infected: 266),
+          Output(date: DateTime.utc(2021, 04, 24), infected: 3223),
         ],
       ),
     ];
@@ -100,56 +100,56 @@ class ApiService {
       Region(
         region: 'Poland',
         outputs: [
-          Output(date: DateTime.utc(2021, 04, 21), cases: 23),
-          Output(date: DateTime.utc(2021, 04, 22), cases: 43),
-          Output(date: DateTime.utc(2021, 04, 23), cases: 56),
-          Output(date: DateTime.utc(2021, 04, 24), cases: 123),
-          Output(date: DateTime.utc(2021, 04, 25), cases: 666),
-          Output(date: DateTime.utc(2021, 04, 26), cases: 666),
+          Output(date: DateTime.utc(2021, 04, 21), infected: 23),
+          Output(date: DateTime.utc(2021, 04, 22), infected: 43),
+          Output(date: DateTime.utc(2021, 04, 23), infected: 56),
+          Output(date: DateTime.utc(2021, 04, 24), infected: 123),
+          Output(date: DateTime.utc(2021, 04, 25), infected: 666),
+          Output(date: DateTime.utc(2021, 04, 26), infected: 666),
         ],
       ),
       Region(
         region: 'Germany',
         outputs: [
-          Output(date: DateTime.utc(2021, 04, 21), cases: 12330),
-          Output(date: DateTime.utc(2021, 04, 22), cases: 11500),
-          Output(date: DateTime.utc(2021, 04, 23), cases: 12656),
-          Output(date: DateTime.utc(2021, 04, 24), cases: 13567),
-          Output(date: DateTime.utc(2021, 04, 25), cases: 14667),
-          Output(date: DateTime.utc(2021, 04, 26), cases: 15267),
-          Output(date: DateTime.utc(2021, 04, 27), cases: 10467),
-          Output(date: DateTime.utc(2021, 04, 28), cases: 12330),
-          Output(date: DateTime.utc(2021, 04, 29), cases: 11500),
-          Output(date: DateTime.utc(2021, 04, 30), cases: 12656),
-          Output(date: DateTime.utc(2021, 05, 1), cases: 13567),
-          Output(date: DateTime.utc(2021, 04, 2), cases: 14667),
-          Output(date: DateTime.utc(2021, 04, 3), cases: 15267),
-          Output(date: DateTime.utc(2021, 04, 4), cases: 10467),
-          Output(date: DateTime.utc(2021, 04, 5), cases: 12330),
-          Output(date: DateTime.utc(2021, 04, 6), cases: 11500),
-          Output(date: DateTime.utc(2021, 04, 7), cases: 12656),
-          Output(date: DateTime.utc(2021, 04, 8), cases: 13567),
-          Output(date: DateTime.utc(2021, 04, 9), cases: 14667),
-          Output(date: DateTime.utc(2021, 04, 10), cases: 15267),
-          Output(date: DateTime.utc(2021, 04, 11), cases: 10467),
-          Output(date: DateTime.utc(2021, 04, 12), cases: 11500),
-          Output(date: DateTime.utc(2021, 04, 13), cases: 12656),
-          Output(date: DateTime.utc(2021, 04, 14), cases: 13567),
-          Output(date: DateTime.utc(2021, 04, 15), cases: 14667),
-          Output(date: DateTime.utc(2021, 04, 16), cases: 15267),
-          Output(date: DateTime.utc(2021, 04, 17), cases: 10467),
-          Output(date: DateTime.utc(2021, 04, 18), cases: 10467),
+          Output(date: DateTime.utc(2021, 04, 21), infected: 12330),
+          Output(date: DateTime.utc(2021, 04, 22), infected: 11500),
+          Output(date: DateTime.utc(2021, 04, 23), infected: 12656),
+          Output(date: DateTime.utc(2021, 04, 24), infected: 13567),
+          Output(date: DateTime.utc(2021, 04, 25), infected: 14667),
+          Output(date: DateTime.utc(2021, 04, 26), infected: 15267),
+          Output(date: DateTime.utc(2021, 04, 27), infected: 10467),
+          Output(date: DateTime.utc(2021, 04, 28), infected: 12330),
+          Output(date: DateTime.utc(2021, 04, 29), infected: 11500),
+          Output(date: DateTime.utc(2021, 04, 30), infected: 12656),
+          Output(date: DateTime.utc(2021, 05, 1), infected: 13567),
+          Output(date: DateTime.utc(2021, 04, 2), infected: 14667),
+          Output(date: DateTime.utc(2021, 04, 3), infected: 15267),
+          Output(date: DateTime.utc(2021, 04, 4), infected: 10467),
+          Output(date: DateTime.utc(2021, 04, 5), infected: 12330),
+          Output(date: DateTime.utc(2021, 04, 6), infected: 11500),
+          Output(date: DateTime.utc(2021, 04, 7), infected: 12656),
+          Output(date: DateTime.utc(2021, 04, 8), infected: 13567),
+          Output(date: DateTime.utc(2021, 04, 9), infected: 14667),
+          Output(date: DateTime.utc(2021, 04, 10), infected: 15267),
+          Output(date: DateTime.utc(2021, 04, 11), infected: 10467),
+          Output(date: DateTime.utc(2021, 04, 12), infected: 11500),
+          Output(date: DateTime.utc(2021, 04, 13), infected: 12656),
+          Output(date: DateTime.utc(2021, 04, 14), infected: 13567),
+          Output(date: DateTime.utc(2021, 04, 15), infected: 14667),
+          Output(date: DateTime.utc(2021, 04, 16), infected: 15267),
+          Output(date: DateTime.utc(2021, 04, 17), infected: 10467),
+          Output(date: DateTime.utc(2021, 04, 18), infected: 10467),
         ],
       ),
       Region(
         region: 'United Kingdom',
         outputs: [
-          Output(date: DateTime.utc(2021, 04, 21), cases: 123),
-          Output(date: DateTime.utc(2021, 04, 22), cases: 143),
-          Output(date: DateTime.utc(2021, 04, 23), cases: 256),
-          Output(date: DateTime.utc(2021, 04, 24), cases: 3123),
-          Output(date: DateTime.utc(2021, 04, 25), cases: 666),
-          Output(date: DateTime.utc(2021, 04, 26), cases: 666),
+          Output(date: DateTime.utc(2021, 04, 21), infected: 123),
+          Output(date: DateTime.utc(2021, 04, 22), infected: 143),
+          Output(date: DateTime.utc(2021, 04, 23), infected: 256),
+          Output(date: DateTime.utc(2021, 04, 24), infected: 3123),
+          Output(date: DateTime.utc(2021, 04, 25), infected: 666),
+          Output(date: DateTime.utc(2021, 04, 26), infected: 666),
         ],
       ),
     ];

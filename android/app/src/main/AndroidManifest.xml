@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.covid_prediction_app_ios">
    <application
-        android:label="covid_prediction_app_ios"
+        android:label="CovidPredictor"
         android:icon="@mipmap/ic_launcher"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">

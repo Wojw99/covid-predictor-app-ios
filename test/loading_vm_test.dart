@@ -13,16 +13,14 @@ void main() {
         () async {
       final vm = LoadingViewModel();
       // simulate fetching data on loading screen
-      await vm.fetchApiData(
-          path: '127.0.0.1:3000'); // 127.0.0.1 used for testing
+      await vm.fetchApiData();
       // prediction list in AppPreferences should be filled now
       expect(AppPreferences.predictionList.length, regionListLength);
     });
     test('check if AppPreferences real list is filled correctly', () async {
       final vm = LoadingViewModel();
       // simulate fetching data on loading screen
-      await vm.fetchApiData(
-          path: '127.0.0.1:3000'); // 127.0.0.1 used for testing
+      await vm.fetchApiData();
       // real list in AppPreferences should be filled now
       expect(AppPreferences.realList.length, regionListLength);
     });

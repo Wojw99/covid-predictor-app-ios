@@ -58,7 +58,7 @@ class MapViewModel extends ChangeNotifier {
         .where((element) => element.date == selectedDate)
         .toList()
         .first
-        .cases
+        .infected
         .toDouble();
     return cases;
   }

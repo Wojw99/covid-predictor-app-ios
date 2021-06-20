@@ -20,29 +20,29 @@ class LoadingViewModel extends ChangeNotifier {
   /// Fetch API data (if not fetching yet) and fill in Singleton lists.
   /// Path parameters is used only for unit testing.
   /// 192.168.1.20:3000, 10.0.2.2:3000
-  Future<void> fetchApiData({path = '192.168.1.20:3000'}) async {
+  Future<void> fetchApiData() async {
     if (loading) return;
 
     final apiService = ApiService();
     _loading = true;
 
-    AppPreferences.predictionList =
-        await apiService.getPredictionsList(path: path);
-    AppPreferences.realList = await apiService.getRealList(path: path);
-    _success = true;
+    // AppPreferences.predictionList =
+    //     await apiService.getPredictionsList(path: path);
+    // AppPreferences.realList = await apiService.getRealList(path: path);
+    // _success = true;
 
-    // try {
-    //   print('loading data...');
-    //   // Fill in singleton lists available for the whole application
-    //   AppPreferences.predictionList = await apiService.getPredictionsList();
-    //   AppPreferences.realList = await apiService.getPredictionsList();
-    //   _success = true;
-    //   print('success!');
-    // } catch (e) {
-    //   _error = true;
-    //   _errorText = e.toString();
-    //   print(e);
-    // }
+    try {
+      print('loading data...');
+      // Fill in singleton lists available for the whole application
+      AppPreferences.predictionList = await apiService.getPredictionsList();
+      AppPreferences.realList = await apiService.getRealList();
+      _success = true;
+      print('success!');
+    } catch (e) {
+      _error = true;
+      _errorText = e.toString();
+      print(e);
+    }
 
     notifyListeners();
   }

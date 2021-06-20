@@ -2,11 +2,15 @@ import 'package:flutter/cupertino.dart';
 
 class Output {
   final DateTime date;
-  final int cases;
+  final int infected;
+  final int recovered;
+  final int deaths;
 
   Output({
     @required this.date,
-    @required this.cases,
+    @required this.infected,
+    @required this.recovered,
+    @required this.deaths,
   });
 
   factory Output.fromJson(Map<String, dynamic> json) {
@@ -17,7 +21,9 @@ class Output {
 
     return Output(
       date: DateTime.utc(year, month, day),
-      cases: int.parse(json['cases']),
+      infected: int.parse(json['cases']),
+      recovered: int.parse(json['recovered']),
+      deaths: int.parse(json['deaths']),
     );
   }
 }
