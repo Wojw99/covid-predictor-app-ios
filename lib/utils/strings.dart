@@ -26,4 +26,13 @@ class Strings {
 
   // SelectRegionPage
   static const String selectRegion = 'Select region';
+
+  //InfoPage
+
+static const String covidInfo='Important information ';
+
+static const String testPositive='Check below if you are feeling sick: ';
+
+
+
 }

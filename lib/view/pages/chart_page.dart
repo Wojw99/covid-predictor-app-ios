@@ -46,6 +46,8 @@ class _ChartPageState extends State<ChartPage> {
           iconColor: _appTheme.colors.accent,
         ),
       ),
+
+
       body: SingleChildScrollView(
         child: Container(
           color: _appTheme.colors.gray,

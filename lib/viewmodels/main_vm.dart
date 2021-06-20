@@ -61,6 +61,10 @@ class MainViewModel extends ChangeNotifier {
     );
   }
 
+
+
+
+
   int getPredictedCasesToday() {
     final poland = AppPreferences.predictionList
         .where((element) => element.region == defaultRegion)

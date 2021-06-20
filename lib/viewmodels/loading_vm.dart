@@ -27,8 +27,8 @@ class LoadingViewModel extends ChangeNotifier {
     _loading = true;
 
     AppPreferences.predictionList =
-        await apiService.getPredictionsList(path: path);
-    AppPreferences.realList = await apiService.getRealList(path: path);
+        await apiService.getPredictionsList(path: Path);
+    AppPreferences.realList = await apiService.getRealList(path: Path);
     _success = true;
 
     // try {

@@ -7,6 +7,7 @@ import 'package:covid_prediction_app_ios/viewmodels/main_vm.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'info_page.dart';
 
 class MainPage extends StatefulWidget {
   @override
@@ -31,12 +32,38 @@ class _MainPageState extends State<MainPage> {
         backgroundColor: _appTheme.colors.gray,
         elevation: 0.0,
         actions: [
+
+
+          //icon button for covid information
+
+          IconButton(
+            icon: Icon(Icons.info),
+            color: _appTheme.colors.accent,
+            //color: Colors.blueAccent,
+            //onPressed: _appTheme.toggleDarkMode,
+
+            onPressed: (){
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => InfoPage()),
+              );
+            },
+
+
+          ),
+
+
           IconButton(
             icon: Icon(Icons.visibility),
             color: _appTheme.colors.accent,
             onPressed: _appTheme.toggleDarkMode,
           ),
+
+
         ],
+
+
+
       ),
       body: Container(
         color: _appTheme.colors.gray,
