@@ -47,6 +47,20 @@ class MainViewModel extends ChangeNotifier {
     );
   }
 
+  void navigateToInfoPage(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => MultiProvider(
+          providers: [
+            ChangeNotifierProvider(create: (_) => AppTheme()),
+          ],
+          child: InfoPage(),
+        ),
+      ),
+    );
+  }
+
   void navigateToChartPage(BuildContext context) {
     Navigator.push(
       context,
@@ -62,28 +76,6 @@ class MainViewModel extends ChangeNotifier {
     );
   }
 
-//<<<<<<< Updated upstream
-//=======
-  void navigateToInfoPage(BuildContext context){
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => MultiProvider(
-          providers: [
-            ChangeNotifierProvider(create: (_) => AppTheme()),
-          ],
-          child: InfoPage(),
-        ),
-      ),
-    );
-
-  }
-
-
-
-
-
-//>>>>>>> Stashed changes
   int getPredictedCasesToday() {
     final poland = AppPreferences.predictionList
         .where((element) => element.region == defaultRegion)

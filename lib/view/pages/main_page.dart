@@ -38,21 +38,12 @@ class _MainPageState extends State<MainPage> {
             color: _appTheme.colors.accent,
             onPressed: _appTheme.toggleDarkMode,
           ),
-
           IconButton(
             icon: Icon(Icons.info),
             color: _appTheme.colors.accent,
-            //color: Colors.blueAccent,
-            //onPressed: _appTheme.toggleDarkMode,
-
-            onPressed: (){
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => InfoPage()),
-              );
+            onPressed: () {
+              _viewModel.navigateToInfoPage(context);
             },
-
-
           ),
         ],
       ),
