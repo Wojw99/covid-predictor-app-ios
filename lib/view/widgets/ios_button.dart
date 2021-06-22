@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class IosButton extends StatelessWidget {
+  final Key key;
   final Function onPressed;
   final String text;
   final IconData iconData;
@@ -17,6 +18,7 @@ class IosButton extends StatelessWidget {
   final bool disabled;
 
   IosButton({
+    this.key,
     @required this.onPressed,
     @required this.text,
     this.iconData,
@@ -41,6 +43,7 @@ class IosButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
+      key: key,
       onPressed: onPressed,
       child: Container(
         height: height,

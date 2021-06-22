@@ -56,12 +56,15 @@ class _TablePageState extends State<TablePage> {
                             child: Padding(
                               padding: EdgeInsets.only(right: 5.0),
                               child: IosButton(
+                                key: Key(
+                                  _viewModel.formatTotalCasesEnum(cases),
+                                ),
                                 onPressed: () {
                                   _viewModel.changeTotalCases(cases);
                                 },
                                 disabled: _viewModel.selectedCases != cases,
                                 disabledColor: _appTheme.colors.gray,
-                                text: _viewModel.formatChartInterval(cases),
+                                text: _viewModel.formatTotalCasesEnum(cases),
                                 backgroundColor: _appTheme.colors.accent,
                               ),
                             ),
@@ -119,10 +122,11 @@ class _TablePageState extends State<TablePage> {
                   child: Container(
                     color: _appTheme.colors.light,
                     child: ListView.builder(
-                        itemCount: _viewModel.getListLength(),
-                        itemBuilder: (BuildContext context, int index) {
-                          return buildTableRow(index);
-                        }),
+                      itemCount: _viewModel.getListLength(),
+                      itemBuilder: (BuildContext context, int index) {
+                        return buildTableRow(index);
+                      },
+                    ),
                   ),
                 ),
               ],

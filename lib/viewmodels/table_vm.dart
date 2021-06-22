@@ -30,7 +30,7 @@ class TableViewModel extends ChangeNotifier {
     TotalCases.Deaths,
   ];
 
-  String formatChartInterval(TotalCases cases) {
+  String formatTotalCasesEnum(TotalCases cases) {
     if (cases == TotalCases.Infected)
       return 'Infected';
     else if (cases == TotalCases.Recovered)
